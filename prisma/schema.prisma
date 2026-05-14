@@ -11,6 +11,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ===========================================
+// LEGAL OPERATIONS SAAS PLATFORM SCHEMA
+// ===========================================
+
 // Product catalog
 model Product {
   id          String   @id @default(cuid())
@@ -57,35 +61,337 @@ model Price {
   @@unique([productId, tierId])
 }
 
-// Orders (from checkout sessions)
+// ===========================================
+// CONTRACT SYSTEM (Subscription Contracts)
+// ===========================================
+model Contract {
+  id                  String   @id @default(cuid())
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id])
+  
+  contractTerm        Int      // 12, 24, or 36 months
+  status              ContractStatus @default(PENDING)
+  
+  monthlyPrice        Int      // Price per month in dollars (whole dollars)
+  stripeSubscriptionId String?
+  stripeCustomerId   String?
+  
+  startDate          DateTime?
+  endDate           DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, id])
+}
+
+enum ContractStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+// ===========================================
+// BILLING - Order Billing
+// ===========================================
 model Order {
   id                  String   @id @default(cuid())
-  stripeSessionId     String   @unique
+  stripeSessionId     String?  @unique
   stripePaymentIntentId String?
   stripeCustomerId    String?
   
-  product            Product  @relation(fields: [productId], references: [id])
-  productId          String
+  user                User    @relation(fields: [userId], references: [id])
+  userId              String
   
-  customerEmail      String
-  amountTotal       Int
-  currency         String   @default("usd")
-  status           OrderStatus @default(PENDING)
+  product             Product @relation(fields: [productId], references: [id])
+  productId           String
   
-  metadata          Json?
+  // Order details
+  orderNumber        String   @unique // e.g., "ORD-2024-0001"
+  serviceType       String   // e.g., "incorporation", "contract-review"
+  servicePrice     Int      // in dollars (whole dollars only)
+  processingFee    Float    @default(9.99)
+  amountTotal     Int      // servicePrice + processingFee in cents
+  
+  // Billing
+  billingType      BillingType @default(IMMEDIATE) // IMMEDIATE or NET_15 or NET_30
+  netTermsStatus  NetTermsStatus? // only for NET_* 
+  paymentStatus   PaymentStatus @default(PENDING)
+  
+  // Status
+  status           OrderStatus @default(NEW)
+  
+  // Field agent assignment
+  fieldAgentId    String?
+  fieldAgent     FieldAgent? @relation(fields: [fieldAgentId], references: [id])
+  
+  // Document bundle
+  documents      Document[]
+  documentStatus DocumentStatus @default(PENDING)
+  
+  // Timeline
+  timeline       OrderTimeline[]
+  
+  // Messages
+  messages        Message[]
+  
+  metadata        Json?
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-enum OrderStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  REFUNDED
+enum BillingType {
+  IMMEDIATE
+  NET_15
+  NET_30
 }
 
-// Subscriptions
+enum NetTermsStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum OrderStatus {
+  NEW
+  PROCESSING
+  SCHEDULED
+  COMPLETED
+  ARCHIVED
+}
+
+enum DocumentStatus {
+  PENDING
+  UPLOADED
+  SIGNED
+  COMPLETED
+}
+
+// ===========================================
+// ORDER TIMELINE
+// ===========================================
+model OrderTimeline {
+  id          String   @id @default(cuid())
+  order       Order    @relation(fields: [orderId], references: [id])
+  orderId     String
+  
+  status     String   // NEW, PROCESSING, SCHEDULED, COMPLETED
+  note       String?
+  userId     String?  // who made the change
+  userName   String?  // cached user name
+  
+  createdAt  DateTime @default(now())
+}
+
+// ===========================================
+// DOCUMENTS
+// ===========================================
+model Document {
+  id          String   @id @default(cuid())
+  order       Order    @relation(fields: [orderId], references: [id])
+  orderId     String
+  
+  name       String   // Original filename
+  storedName String   // Encrypted storage name
+  type       DocumentType
+  version    Int      @default(1)
+  status     String   @default(PENDING)
+  
+  // Encryption
+  encryptionKey String? // Encrypted per-document key
+  checksum     String? // SHA256 for integrity
+  
+  uploadedBy String?
+  uploadedAt DateTime @default(now())
+  
+  // Signed document URL (for signed docs)
+  signedUrl  String?
+  signedAt   DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DocumentType {
+  UPLOAD
+  TEMPLATE
+  SIGNED
+  OTHER
+}
+
+// ===========================================
+// USER / LAW FIRM
+// ===========================================
+model User {
+  id                  String   @id @default(cuid())
+  email               String   @unique
+  businessName       String
+  lawFirmType        LawFirmType
+  
+  // Account status
+  status             UserStatus @default(ACTIVE)
+  
+  // Signup data
+  bankAccountToken   String?  // Tokenized bank account
+  creditCardToken   String?  // Tokenized credit card
+  fedExAccount      String?
+  upsAccount        String?
+  
+  // Shipping preferences
+  shippingPreference ShippingPreference?
+  dhsShipping       Boolean  @default(false)
+  complianceShipping Boolean @default(false)
+  
+  // Billing contact
+  billingContact    String?
+  billingEmail     String?
+  
+  // Contracts
+  contracts         Contract[]
+  orders            Order[]
+  
+  // Portal sessions
+  sessions          Session[]
+  
+  // Messages sent by user
+  userMessages     Message[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum LawFirmType {
+  SOLE_PRACTITIONER
+  SMALL_FIRM        // 2-10 attorneys
+  MEDIUM_FIRM      // 11-50 attorneys
+  LARGE_FIRM       // 50+ attorneys
+  IN_HOUSE        // In-house counsel
+}
+
+enum UserStatus {
+  PENDING     // Awaiting email verification
+  ACTIVE      // Full access
+  NET_PENDING // Net terms application pending
+  SUSPENDED   // Temporarily disabled
+  BANNED     // Permanently disabled
+}
+
+enum ShippingPreference {
+  FEDEX
+  UPS
+  USPS
+  OTHER
+}
+
+// ===========================================
+// PORTAL SESSIONS
+// ===========================================
+model Session {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  
+  token      String   @unique
+  expiresAt  DateTime
+  
+  createdAt  DateTime @default(now())
+}
+
+// ===========================================
+// FIELD AGENTS
+// ===========================================
+model FieldAgent {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name       String
+  phone      String?
+  status     AgentStatus @default(ACTIVE)
+  
+  // Payout ledger
+  payouts     Payout[]
+  orders     Order[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum AgentStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+// ===========================================
+// AGENT PAYOUT LEDGER
+// ===========================================
+model Payout {
+  id           String   @id @default(cuid())
+  fieldAgent   FieldAgent @relation(fields: [fieldAgentId], references: [id])
+  fieldAgentId String
+  
+  orderId    String?  // Associated order
+  amount    Int      // in cents
+  status    PayoutStatus @default(PENDING)
+  
+  // Stripe payout reference
+  stripePayoutId String?
+  
+  createdAt DateTime @default(now())
+  paidAt   DateTime?
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+}
+
+// ===========================================
+// AI MESSAGING SYSTEM
+// ===========================================
+model Message {
+  id          String   @id @default(cuid())
+  order       Order    @relation(fields: [orderId], references: [id])
+  orderId    String
+  
+  sender     MessageSender
+  user       User?    @relation(fields: [userId], references: [id])
+  userId     String?
+  
+  deliveryMethod MessageDelivery
+  
+  content    String
+  metadata  Json?    // For AI: appointment suggestions, etc.
+  
+  readAt    DateTime?
+  sentAt   DateTime @default(now())
+}
+
+enum MessageSender {
+  USER
+  SYSTEM
+  AI
+}
+
+enum MessageDelivery {
+  IN_APP
+  EMAIL
+  SMS
+}
+
+// ===========================================
+// SUBSCRIPTIONS (Stripe-backed)
+// ===========================================
 model Subscription {
   id                String   @id @default(cuid())
   stripeSubscriptionId String  @unique
@@ -94,7 +400,7 @@ model Subscription {
   product           Product  @relation(fields: [productId], references: [id])
   productId        String
   
-  price            Price    @relation(fields: [priceId], references: [id])
+  price            Price   @relation(fields: [priceId], references: [id])
   priceId         String
   
   status            SubscriptionStatus
@@ -116,11 +422,23 @@ enum SubscriptionStatus {
   UNPAID
 }
 
+// Subscription price
+model SubscriptionPrice {
+  id          String   @id @default(cuid())
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String
+  
+  price       Price    @relation(fields: [priceId], references: [id])
+  priceId     String
+  
+  createdAt   DateTime @default(now())
+}
+
 // Customer
 model Customer {
   id              String   @id @default(cuid())
   stripeCustomerId String  @unique
-  email           String   @unique
+  email         String   @unique
   
   subscriptions  Subscription[]
   
