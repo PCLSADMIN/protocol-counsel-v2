@@ -177,3 +177,44 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Class wrapper for webhook handling
+export class WebhookOrchestrator {
+  constructor(private db: unknown) {}
+
+  async handle(event: { type: string; data: { object: unknown } }) {
+    switch (event.type) {
+      case "checkout.session.completed":
+        return this.onCheckout(event);
+      case "customer.subscription.created":
+        return this.onSubscription(event);
+      case "invoice.payment_succeeded":
+        return this.onPayment(event);
+      default:
+        return null;
+    }
+  }
+
+  async onCheckout(event: { data: { object: unknown } }) {
+    // @ts-expect-error - db type is unknown at this point
+    return this.db?.orders?.create({
+      data: event.data.object,
+    });
+  }
+
+  async onSubscription(event: { id: string; type: string; data: { object: unknown } }) {
+    // @ts-expect-error - db type is unknown at this point
+    return this.db?.subscriptions?.upsert({
+      where: { id: event.id },
+      update: event.data.object,
+      create: event.data.object,
+    });
+  }
+
+  async onPayment(event: { data: { object: unknown } }) {
+    // @ts-expect-error - db type is unknown at this point
+    return this.db?.payments?.create({
+      data: event.data.object,
+    });
+  }
+}

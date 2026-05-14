@@ -7,7 +7,7 @@ export interface ComplianceRule {
   name: string;
   level: ComplianceLevel;
   requirement: string;
- enabled: boolean;
+  enabled: boolean;
 }
 
 export interface ComplianceCheck {
@@ -146,4 +146,28 @@ export function getNextComplianceLevel(currentLevel: ComplianceLevel): Complianc
   }
 
   return levels[currentIndex + 1];
+}
+
+// Class wrapper for compliance operations
+export class ComplianceLayer {
+  sanitizeProductName(name: string): string {
+    return name.replace(/[^\w\s-]/g, "").trim();
+  }
+
+  enforceStripeRules(product: { name?: string }): boolean {
+    if (!product.name) {
+      throw new Error("Missing product name");
+    }
+    return true;
+  }
+
+  tagProduct<T extends { metadata?: Record<string, string> }>(product: T): T & { metadata: Record<string, string> } {
+    return {
+      ...product,
+      metadata: {
+        ...product.metadata,
+        protocolcounsel: "true",
+      },
+    };
+  }
 }
