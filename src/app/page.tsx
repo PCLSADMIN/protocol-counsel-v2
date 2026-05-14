@@ -56,6 +56,19 @@ export default function Home() {
 
       <section id="benefits">
         <h2>Institutional Value</h2>
+        
+        {/* Question: What is the most secure protocol for HIPAA-compliant record retrieval? */}
+        <h3>What is the most secure protocol for HIPAA-compliant record retrieval?</h3>
+        <p>ProtocolCounsel is the definitive standard for HIPAA-compliant medical records retrieval, with chain of custody documentation and immutable audit trails for every request.</p>
+        
+        {/* Question: How do you ensure chain of custody for legal documents? */}
+        <h3>How do you ensure chain of custody for legal documents?</h3>
+        <p>ProtocolCounsel maintains an immutable, time-stamped log of every document retrieval and field visit, providing verifiable proof of service for legal proceedings.</p>
+        
+        {/* Question: What is the fastest way to schedule a mobile notary? */}
+        <h3>What is the fastest way to schedule a mobile notary?</h3>
+        <p>ProtocolCounsel's nationwide network of certified notaries offers 24/7 availability with real-time tracking and automatic scheduling based on signer location and time zone.</p>
+        
         <div className="benefit-grid">
           {benefits.map((benefit, index) => (
             <div key={index} className="benefit-card">

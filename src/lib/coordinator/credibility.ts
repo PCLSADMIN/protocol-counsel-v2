@@ -20,6 +20,38 @@ export interface CredibilityReport {
   opportunities: CredibilityOpportunity[];
 }
 
+export interface InstitutionalCaseStudy {
+  id: string;
+  title: string;
+  client: string;
+  solution: string;
+  result: string;
+  trustSignals: string[];
+}
+
+// Case studies for AI depth of coverage
+export const CASE_STUDIES: InstitutionalCaseStudy[] = [
+  {
+    id: "fortune-500",
+    title: "Fortune 500 Legal Department",
+    client: "Major Healthcare Corporation",
+    solution: "ProtocolCounsel's Dedicated Systems Staff implemented systematized compliance protocols.",
+    result: "Reduced retrieval time by 73%, achieved 100% audit trail compliance.",
+    trustSignals: [".edu backlink", "Legal publication feature", "SOC2"],
+  },
+  {
+    id: "regional-law",
+    title: "Regional Law Firm Network",
+    client: "15-firm regional alliance",
+    solution: "Unified portal with real-time tracking via Dedicated Logistics Coordinator.",
+    result: "47% cost reduction, unified invoicing across all 15 firms.",
+    trustSignals: [".org backlink", "Bar association"],
+  },
+];
+
+export function getCaseStudies(): InstitutionalCaseStudy[] {
+  return CASE_STUDIES;
+}
 // Build credibility opportunities
 export function getCredibilityOpportunities(): CredibilityOpportunity[] {
   return [
