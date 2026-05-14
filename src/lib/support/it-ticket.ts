@@ -2,6 +2,8 @@
 
 export type SupportTicketType = "LOGIN_ISSUE" | "DNS_ISSUE" | "API_ISSUE" | "PAYMENT_ISSUE" | "OTHER";
 
+const TICKET_PREFIX = "PCL"; // Protocol Counsel Ltd ID
+
 export interface SupportTicket {
   ticketId: string;
   type: SupportTicketType;
@@ -20,7 +22,7 @@ const AUTO_RESOLVE = {
 };
 
 export async function createTicket(type: SupportTicketType, userId: string, desc: string, firmId?: string) {
-  const ticketId = `support_${Date.now()}`;
+  const ticketId = `${TICKET_PREFIX}_${Date.now()}`;
   const auto = AUTO_RESOLVE[type] || { resolved: false, msg: "Ticket created" };
   return {
     ticketId, type, userId, firmId, description: desc, createdAt: new Date(),
