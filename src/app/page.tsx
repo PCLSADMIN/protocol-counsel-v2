@@ -1,20 +1,30 @@
 export default function Home() {
-  // Services to display (no pricing)
-  const services = [
+  // Value proposition - institutional focus
+  const benefits = [
     {
-      id: "medical_records",
-      name: "Medical Records Retrieval",
-      description: "Secure chain of custody for healthcare data requests.",
+      icon: "📄",
+      title: "Cost Recovery Ready",
+      description: "Every order generates a LEDES-compatible invoice for instant client billing.",
     },
     {
-      id: "skip_trace",
-      name: "Skip Tracing",
-      description: "Locate individuals for legal service with verified databases.",
+      icon: "💳",
+      title: "Instant Net 30/15",
+      description: "Automated bank verification (Plaid) for immediate credit lines.",
     },
     {
-      id: "mobile_notary",
-      name: "Mobile Notary",
-      description: "On-demand certified notaries available 24/7.",
+      icon: "🔗",
+      title: "Chain of Custody",
+      description: "Immutable, time-stamped logs for every document retrieval and field visit.",
+    },
+    {
+      icon: "🌍",
+      title: "Global Time-Awareness",
+      description: "Logistics handled in the signer's local time zone, 24/7.",
+    },
+    {
+      icon: "✓",
+      title: "White-Label Integrity",
+      description: "All documents are sanitized and delivered under the Protocol Counsel seal.",
     },
   ];
 
@@ -23,24 +33,49 @@ export default function Home() {
       <section className="hero">
         <h1>ProtocolCounsel</h1>
         <p>Legal Operations Orchestration Platform</p>
-        <p>Secure · Compliant · Transparent</p>
-        <a href="/contact" className="cta-button">
-          Request Contract Rates
+        <p>Operational Certainty. Institutional Grade.</p>
+        <a href="/portal/login" className="cta-button">
+          Enter the Protocol
         </a>
       </section>
 
-      <section id="services">
-        <h2>Our Services</h2>
-        <div className="service-grid">
-          {services.map((service) => (
-            <div key={service.id} className="service-card">
-              <h3>{service.name}</h3>
-              <p>{service.description}</p>
-              <a href="/portal/login" className="btn">
-                Request Contract Rates
-              </a>
+      <section id="benefits">
+        <h2>Institutional Value</h2>
+        <div className="benefit-grid">
+          {benefits.map((benefit, index) => (
+            <div key={index} className="benefit-card">
+              <span className="benefit-icon">{benefit.icon}</span>
+              <h3>{benefit.title}</h3>
+              <p>{benefit.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <div className="service-grid">
+          <div className="service-card">
+            <h3>Medical Records Retrieval</h3>
+            <p>Secure chain of custody for healthcare data requests.</p>
+            <a href="/portal/login" className="btn">
+              Request Contract Access
+            </a>
+          </div>
+          <div className="service-card">
+            <h3>Skip Tracing</h3>
+            <p>Verified database search for legal service.</p>
+            <a href="/portal/login" className="btn">
+              Request Contract Access
+            </a>
+          </div>
+          <div className="service-card">
+            <h3>Mobile Notary</h3>
+            <p>On-demand certified notaries, 24/7.</p>
+            <a href="/portal/login" className="btn">
+              Request Contract Access
+            </a>
+          </div>
         </div>
       </section>
 
