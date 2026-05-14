@@ -11,7 +11,7 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 export const stripeClient = stripeSecretKey
   ? new Stripe(stripeSecretKey, {
-      apiVersion: "2025-04-30.basil",
+      apiVersion: "2026-04-22.dahlia",
       typescript: true,
     })
   : null;
@@ -23,17 +23,17 @@ export function isStripeConfigured(): boolean {
 // Product mapping cache
 const productPriceCache: Map<string, string> = new Map();
 
-interface StripeProduct {
+export interface StripeProduct {
   id: string;
   name: string;
-  description: string;
+  description: string | null;
   active: boolean;
 }
 
-interface StripePrice {
+export interface StripePrice {
   id: string;
   product: string;
-  unitAmount: number;
+  unitAmount: number | null;
   currency: string;
   recurring: { interval: "month" | "year" } | null;
   active: boolean;
@@ -41,7 +41,7 @@ interface StripePrice {
 
 export async function syncProductToStripe(
   product: ProductRoute
-): Promise<StripeProduct> {
+): Promise<Stripe.Product> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
@@ -63,10 +63,10 @@ export async function syncProductToStripe(
 
     await stripeClient.prices.create({
       product: stripeProduct.id,
-      unitAmount: tier.price,
+      unit_amount: tier.price,
       currency: "usd",
       recurring: {
-        interval: tier.interval as "month" | "year",
+        interval: tier.interval,
       },
       metadata: {
         product_id: product.productId,
@@ -81,7 +81,7 @@ export async function syncProductToStripe(
 export async function syncProductPrices(
   productId: string,
   stripeProductId: string
-): Promise<StripePrice[]> {
+): Promise<Stripe.Price[]> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
@@ -91,7 +91,7 @@ export async function syncProductPrices(
     throw new Error(`Product not found: ${productId}`);
   }
 
-  const prices: StripePrice[] = [];
+  const prices: Stripe.Price[] = [];
 
   // Get existing prices
   const existingPrices = await stripeClient.prices.list({
@@ -107,17 +107,17 @@ export async function syncProductPrices(
       (p) => p.recurring?.interval === tier.interval
     );
 
-    if (existing && existing.unitAmount !== tier.price) {
+    if (existing && existing.unit_amount !== tier.price) {
       // Deactivate old price
       await stripeClient.prices.update(existing.id, { active: false });
 
       // Create new price
       const newPrice = await stripeClient.prices.create({
         product: stripeProductId,
-        unitAmount: tier.price,
+        unit_amount: tier.price,
         currency: "usd",
         recurring: {
-          interval: tier.interval as "month" | "year",
+          interval: tier.interval,
         },
         metadata: {
           product_id: productId,
@@ -136,22 +136,19 @@ export async function syncProductPrices(
 
 export async function getStripeProduct(
   productId: string
-): Promise<StripeProduct | null> {
+): Promise<Stripe.Product | null> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
 
-  const products = await stripeClient.products.list({
-    metadata: { product_id: productId },
-    limit: 1,
-  });
-
-  return products.data[0] || null;
+  const products = await stripeClient.products.list();
+  // Find product by metadata.product_id
+  return products.data.find(p => p.metadata?.product_id === productId) || null;
 }
 
 export async function getStripePrices(
   productId: string
-): Promise<StripePrice[]> {
+): Promise<Stripe.Price[]> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
@@ -203,16 +200,16 @@ export async function createCheckoutSessionForProduct(
 
   const session = await stripeClient.checkout.sessions.create({
     mode: "subscription",
-    paymentMethodTypes: ["card"],
-    lineItems: [
+    payment_method_types: ["card"],
+    line_items: [
       {
         price: price.id,
         quantity: 1,
       },
     ],
-    customerEmail: options.customerEmail,
-    successUrl: options.successUrl,
-    cancelUrl: options.cancelUrl,
+    customer_email: options.customerEmail,
+    success_url: options.successUrl,
+    cancel_url: options.cancelUrl,
     metadata: {
       product_id: productId,
       tier_id: tierId,
@@ -228,20 +225,20 @@ export async function createCheckoutSessionForProduct(
 export async function cancelSubscription(
   subscriptionId: string,
   cancelAtPeriodEnd = true
-): Promise<void> {
+): Promise<Stripe.Subscription> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
 
-  await stripeClient.subscriptions.update(subscriptionId, {
-    cancelAtPeriodEnd,
+  return stripeClient.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: cancelAtPeriodEnd,
   });
 }
 
 export async function updateSubscription(
   subscriptionId: string,
   newPriceId: string
-): Promise<void> {
+): Promise<Stripe.Subscription> {
   if (!stripeClient) {
     throw new Error("Stripe not configured");
   }
@@ -250,13 +247,13 @@ export async function updateSubscription(
     subscriptionId
   );
 
-  await stripeClient.subscriptions.update(subscriptionId, {
+  return stripeClient.subscriptions.update(subscriptionId, {
     items: [
       {
         id: subscription.items.data[0].id,
         price: newPriceId,
       },
     ],
-    prorationBehavior: "create_prorations",
+    proration_behavior: "create_prorations",
   });
 }

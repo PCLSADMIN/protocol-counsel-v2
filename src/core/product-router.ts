@@ -1,7 +1,8 @@
 // Product Router - maps inbound requests to products
 
-import { Product, PricingTier } from "./pricing-engine";
+import { Stripe } from "stripe";
 
+// Re-export types for backward compatibility
 export interface ProductRoute {
   slug: string;
   productId: string;
@@ -13,8 +14,16 @@ export interface ProductRoute {
   webhookTriggers: string[];
 }
 
+export interface PricingTier {
+  id: string;
+  name: string;
+  price: number;
+  interval: "month" | "year";
+  custom?: boolean;
+}
+
 export interface RouteRequest {
-  source: string; // e.g., "landing-page", "api-callback", "webhook"
+  source: string;
   campaign?: string;
   referrer?: string;
   utmParams?: Record<string, string>;
@@ -68,6 +77,7 @@ const PRODUCT_CATALOG: ProductRoute[] = [
   },
 ];
 
+// Export functions for backward compatibility
 export function getProductBySlug(slug: string): ProductRoute | undefined {
   return PRODUCT_CATALOG.find((p) => p.slug === slug);
 }
@@ -81,10 +91,8 @@ export function getAllProducts(): ProductRoute[] {
 }
 
 export function routeRequest(request: RouteRequest): RouteResult | null {
-  // Determine product based on source/campaign
   let product: ProductRoute | undefined;
 
-  // Simple routing logic based on campaign or source
   if (request.campaign) {
     if (request.campaign.includes("enterprise")) {
       product = getProductBySlug("protocol-counsel-enterprise");
@@ -95,7 +103,6 @@ export function routeRequest(request: RouteRequest): RouteResult | null {
     }
   }
 
-  // Fall back to source-based routing
   if (!product) {
     if (request.source === "landing-starter") {
       product = getProductBySlug("protocol-counsel-starter");
@@ -106,7 +113,6 @@ export function routeRequest(request: RouteRequest): RouteResult | null {
     }
   }
 
-  // Default to starter if no match
   if (!product) {
     product = getProductBySlug("protocol-counsel-starter");
   }
@@ -115,10 +121,8 @@ export function routeRequest(request: RouteRequest): RouteResult | null {
     return null;
   }
 
-  // Determine suggested tier
   const suggestedTier = request.campaign?.includes("annual") ? "annual" : "monthly";
 
-  // Build checkout params
   const checkoutParams: Record<string, string> = {
     product_id: product.productId,
     tier: suggestedTier,
@@ -139,4 +143,63 @@ export function routeRequest(request: RouteRequest): RouteResult | null {
 
 export function getProductsByCompliance(level: ProductRoute["complianceLevel"]): ProductRoute[] {
   return PRODUCT_CATALOG.filter((p) => p.complianceLevel === level);
+}
+
+// Class wrapper for Stripe/DB operations
+export class ProductRouter {
+  constructor(
+    private stripe: Stripe | null,
+    private db: unknown
+  ) {}
+
+  async createProduct(type: "subscription" | "one_time", config: {
+    name: string;
+    tier?: string;
+    description?: string;
+    metadata?: Record<string, string>;
+  }) {
+    if (type === "subscription") {
+      return this.createSubscription(config);
+    }
+    return this.createOneTime(config);
+  }
+
+  private async createSubscription(config: {
+    name: string;
+    tier?: string;
+    description?: string;
+    metadata?: Record<string, string>;
+  }) {
+    if (!this.stripe) {
+      throw new Error("Stripe not configured");
+    }
+    return this.stripe.products.create({
+      name: config.name,
+      description: config.description,
+      metadata: {
+        tier: config.tier || "standard",
+        type: "subscription",
+        ...config.metadata,
+      },
+    });
+  }
+
+  private async createOneTime(config: {
+    name: string;
+    tier?: string;
+    description?: string;
+    metadata?: Record<string, string>;
+  }) {
+    if (!this.stripe) {
+      throw new Error("Stripe not configured");
+    }
+    return this.stripe.products.create({
+      name: config.name,
+      description: config.description,
+      metadata: {
+        type: "one_time",
+        ...config.metadata,
+      },
+    });
+  }
 }

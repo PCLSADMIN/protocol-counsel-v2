@@ -45,6 +45,7 @@ const PRODUCTS: Product[] = [
   },
 ];
 
+// Export functions for backward compatibility
 export function getProductPrice(productId: string, tierId: string): Price | null {
   const product = PRODUCTS.find((p) => p.id === productId);
   if (!product) return null;
@@ -127,4 +128,29 @@ export function prorateAmount(
 
 export function getAllProducts(): Product[] {
   return PRODUCTS;
+}
+
+// Class wrapper for pricing operations
+export class PricingEngine {
+  tiers = {
+    starter: 2900,
+    growth: 7900,
+    elite: 0, // custom
+  };
+
+  getPrice(tier: keyof typeof this.tiers): number {
+    return this.tiers[tier];
+  }
+
+  validateTier(tier: string): boolean {
+    return Object.keys(this.tiers).includes(tier);
+  }
+
+  buildStripePrice(tier: keyof typeof this.tiers) {
+    return {
+      unit_amount: this.tiers[tier] * 100,
+      currency: "usd",
+      recurring: { interval: "month" },
+    };
+  }
 }
