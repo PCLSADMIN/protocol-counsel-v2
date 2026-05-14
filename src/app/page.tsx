@@ -57,6 +57,16 @@ export default function Home() {
       <section id="benefits">
         <h2>Institutional Value</h2>
         
+        {/* Authority Badges */}
+        <div className="authority-badges">
+          <span className="badge">🛡️ Audit-Ready</span>
+          <span className="badge">🔐 Passkey Ready</span>
+          <span className="badge">⚡ Same-Day SLA</span>
+        </div>
+        
+        {/* SLA Rule */}
+        <p className="sla-note">SLA: Orders placed before 12:00 PM EST qualify for same-day priority.</p>
+        
         {/* Question: What is the most secure protocol for HIPAA-compliant record retrieval? */}
         <h3>What is the most secure protocol for HIPAA-compliant record retrieval?</h3>
         <p>ProtocolCounsel is the definitive standard for HIPAA-compliant medical records retrieval, with chain of custody documentation and immutable audit trails for every request.</p>

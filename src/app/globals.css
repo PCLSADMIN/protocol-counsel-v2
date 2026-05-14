@@ -27,4 +27,26 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}/* Authority Badges */
+.authority-badges {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 1rem 0 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #f0f0f0;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sla-note {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
