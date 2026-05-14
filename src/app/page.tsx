@@ -26,6 +26,21 @@ export default function Home() {
       title: "White-Label Integrity",
       description: "All documents are sanitized and delivered under the Protocol Counsel seal.",
     },
+    {
+      icon: "🤖",
+      title: "AI-Mediated Transparency",
+      description: "Get real-time, professionally curated updates from the field without the noise of raw communication.",
+    },
+    {
+      icon: "⚡",
+      title: "Instant Support",
+      description: "Both firms and signers have 24/7 access to our AI Dispatcher for immediate logistical answers.",
+    },
+    {
+      icon: "🔐",
+      title: "Sealed-Vault Privacy",
+      description: "All messages and notes are encrypted and accessible only through our secured, authenticated portal.",
+    },
   ];
 
   return (
