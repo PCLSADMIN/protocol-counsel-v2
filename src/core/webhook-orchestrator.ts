@@ -182,7 +182,7 @@ export async function POST(request: NextRequest) {
 export class WebhookOrchestrator {
   constructor(private db: unknown) {}
 
-  async handle(event: { type: string; data: { object: unknown } }) {
+  async handle(event: { type: string; id?: string; data: { object: unknown } }) {
     switch (event.type) {
       case "checkout.session.completed":
         return this.onCheckout(event);
@@ -202,7 +202,7 @@ export class WebhookOrchestrator {
     });
   }
 
-  async onSubscription(event: { id: string; type: string; data: { object: unknown } }) {
+  async onSubscription(event: { id?: string; type: string; data: { object: unknown } }) {
     // @ts-expect-error - db type is unknown at this point
     return this.db?.subscriptions?.upsert({
       where: { id: event.id },
