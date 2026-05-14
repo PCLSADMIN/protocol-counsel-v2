@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Product catalog
+model Product {
+  id          String   @id @default(cuid())
+  stripeId    String?  @unique
+  productId  String   @unique // e.g., "prod_starter"
+  slug       String   @unique // e.g., "protocol-counsel-starter"
+  name       String
+  description String?
+  complianceLevel ComplianceLevel @default(STANDARD)
+  
+  prices     Price[]
+  orders    Order[]
+  subscriptions Subscription[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ComplianceLevel {
+  STANDARD
+  PREMIUM
+  ENTERPRISE
+}
+
+// Pricing tiers
+model Price {
+  id          String   @id @default(cuid())
+  stripeId    String?  @unique
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+  
+  tierId     String   // e.g., "monthly", "annual", "custom"
+  name      String
+  amount    Int      // in cents
+  interval  String   // "month" or "year"
+  active    Boolean  @default(true)
+  custom    Boolean  @default(false)
+  
+  subscriptions SubscriptionPrice[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, tierId])
+}
+
+// Orders (from checkout sessions)
+model Order {
+  id                  String   @id @default(cuid())
+  stripeSessionId     String   @unique
+  stripePaymentIntentId String?
+  stripeCustomerId    String?
+  
+  product            Product  @relation(fields: [productId], references: [id])
+  productId          String
+  
+  customerEmail      String
+  amountTotal       Int
+  currency         String   @default("usd")
+  status           OrderStatus @default(PENDING)
+  
+  metadata          Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// Subscriptions
+model Subscription {
+  id                String   @id @default(cuid())
+  stripeSubscriptionId String  @unique
+  stripeCustomerId   String?
+  
+  product           Product  @relation(fields: [productId], references: [id])
+  productId        String
+  
+  price            Price    @relation(fields: [priceId], references: [id])
+  priceId         String
+  
+  status            SubscriptionStatus
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  cancelAtPeriodEnd  Boolean  @default(false)
+  
+  metadata         Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIALING
+  PAST_DUE
+  CANCELED
+  UNPAID
+}
+
+// Customer
+model Customer {
+  id              String   @id @default(cuid())
+  stripeCustomerId String  @unique
+  email           String   @unique
+  
+  subscriptions  Subscription[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
