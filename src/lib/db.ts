@@ -145,6 +145,31 @@ export async function refundOrder(sessionId: string): Promise<Order> {
   return updateOrderStatus(sessionId, "refunded");
 }
 
+export async function getOrderByPaymentIntent(
+  paymentIntentId: string
+): Promise<Order | null> {
+  if (!isSupabaseConfigured()) {
+    return null;
+  }
+
+  try {
+    const { data, error } = await supabase!
+      .from("orders")
+      .select("*")
+      .eq("stripe_payment_intent_id", paymentIntentId)
+      .single();
+
+    if (error) {
+      console.error("Error fetching order by payment intent:", error);
+      return null;
+    }
+
+    return data as Order;
+  } catch {
+    return null;
+  }
+}
+
 // Health check
 export async function checkDatabaseConnection(): Promise<boolean> {
   if (!isSupabaseConfigured()) {

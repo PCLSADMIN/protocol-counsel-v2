@@ -107,17 +107,30 @@ model Order {
   product             Product @relation(fields: [productId], references: [id])
   productId           String
   
+  // Blind case ID (anonymized for field agents)
+  anonymizedCaseId   String?  @unique // e.g., "CASE-2024-XK792"
+  
   // Order details
   orderNumber        String   @unique // e.g., "ORD-2024-0001"
+  taskDescription  String?  // Task description for agent view
   serviceType       String   // e.g., "incorporation", "contract-review"
   servicePrice     Int      // in dollars (whole dollars only)
   processingFee    Float    @default(9.99)
   amountTotal     Int      // servicePrice + processingFee in cents
   
+  // Shipping
+  shippingLabelUrl  String?
+  shippingTechFee Float    @default(4.00)
+  shippedAt       DateTime?
+  
   // Billing
   billingType      BillingType @default(IMMEDIATE) // IMMEDIATE or NET_15 or NET_30
   netTermsStatus  NetTermsStatus? // only for NET_* 
   paymentStatus   PaymentStatus @default(PENDING)
+  
+  // Agent payout
+  agentPayoutAmount Int?    // Payout to field agent (cents)
+  agentPayoutId   String?
   
   // Status
   status           OrderStatus @default(NEW)
@@ -133,7 +146,7 @@ model Order {
   // Timeline
   timeline       OrderTimeline[]
   
-  // Messages
+  // Messages (notes go through scrub relay)
   messages        Message[]
   
   metadata        Json?
@@ -245,9 +258,11 @@ model User {
   creditCardToken   String?  // Tokenized credit card
   fedExAccount      String?
   upsAccount        String?
+  dhlAccount       String?
   
   // Shipping preferences
   shippingPreference ShippingPreference?
+  defaultReturnAddress String?
   dhsShipping       Boolean  @default(false)
   complianceShipping Boolean @default(false)
   
@@ -361,12 +376,16 @@ enum PayoutStatus {
 // ===========================================
 model Message {
   id          String   @id @default(cuid())
-  order       Order    @relation(fields: [orderId], references: [id])
+  order       Order   @relation(fields: [orderId], references: [id])
   orderId    String
   
   sender     MessageSender
   user       User?    @relation(fields: [userId], references: [id])
   userId     String?
+  
+  // Note relay - scrub agent names for client portal
+  isAgentNote Boolean @default(false)
+  scrubbedContent String? // Agent content with name removed
   
   deliveryMethod MessageDelivery
   

@@ -3,11 +3,14 @@ import {
   constructWebhookEvent,
   isStripeConfigured,
   getCheckoutSession,
+  createTransfer,
+  getStripeInstance,
 } from "@/lib/stripe";
 import {
   completeOrder,
   failOrder,
   refundOrder,
+  getOrderByPaymentIntent,
   Order,
   checkDatabaseConnection,
 } from "@/lib/db";
@@ -68,11 +71,8 @@ async function handleChargeRefunded(event: StripeEvent) {
 
   console.log("Charge refunded:", charge.payment_intent);
 
-  // Find order by payment intent and mark as refunded
-  // This is a simplified implementation - in production you'd query by payment intent
   if (charge.payment_intent) {
     try {
-      // Get the checkout session to find the order
       const sessions = await getCheckoutSession(charge.payment_intent as string);
       if (sessions && sessions.id) {
         await refundOrder(sessions.id);
@@ -85,11 +85,52 @@ async function handleChargeRefunded(event: StripeEvent) {
   }
 }
 
+// Immediate Payout: Trigger transfer to Service Partner on payment success
+async function handlePaymentIntentSucceeded(event: StripeEvent) {
+  const paymentIntent = event.data.object as {
+    id: string;
+    amount: number;
+    currency: string;
+  };
+
+  console.log("Payment intent succeeded:", paymentIntent.id);
+
+  try {
+    // Find order by payment intent
+    const order = await getOrderByPaymentIntent(paymentIntent.id);
+    
+    // Extended order type with fields not in current DB model
+    const orderWithAgent = order as Order & {
+      fieldAgentId?: string;
+      agentPayoutAmount?: number;
+      orderNumber?: string;
+    };
+    
+    if (orderWithAgent && orderWithAgent.fieldAgentId && orderWithAgent.agentPayoutAmount) {
+      // Create immediate transfer to field agent
+      const transfer = await createTransfer({
+        amount: orderWithAgent.agentPayoutAmount,
+        currency: paymentIntent.currency || "usd",
+        destination: orderWithAgent.fieldAgentId,
+        description: `Payout for Order ${orderWithAgent.orderNumber}`,
+      });
+
+      console.log("Transfer created:", transfer.id);
+      console.log("Agent payout processed:", orderWithAgent.fieldAgentId);
+    } else {
+      console.log("No field agent assigned or no payout amount - skipping transfer");
+    }
+  } catch (error) {
+    console.error("Failed to process payout:", error);
+  }
+}
+
 // Map of event types to handlers
 const WEBHOOK_HANDLERS: Record<string, WebhookHandler> = {
   "checkout.session.completed": handleCheckoutSessionCompleted,
   "checkout.session.async_payment_failed": handleCheckoutSessionAsyncPaymentFailed,
   "charge.refunded": handleChargeRefunded,
+  "payment_intent.succeeded": handlePaymentIntentSucceeded,
 };
 
 export async function POST(request: NextRequest) {

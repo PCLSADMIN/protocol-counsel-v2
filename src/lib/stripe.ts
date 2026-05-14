@@ -152,3 +152,33 @@ export async function createRefund(
 
   return refund;
 }
+
+// Transfer creation (for immediate agent payouts)
+export interface TransferInput {
+  amount: number;
+  currency: string;
+  destination: string; // Agent's Stripe Connect account ID
+  description?: string;
+}
+
+export async function createTransfer(
+  input: TransferInput
+): Promise<Stripe.Transfer> {
+  if (!stripe) {
+    throw new Error("Stripe not configured");
+  }
+
+  const transfer = await stripe.transfers.create({
+    amount: input.amount,
+    currency: input.currency,
+    destination: input.destination,
+    description: input.description,
+  });
+
+  return transfer;
+}
+
+// Get Stripe instance for direct API access
+export function getStripeInstance(): Stripe | null {
+  return stripe;
+}
