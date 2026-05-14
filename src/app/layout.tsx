@@ -3,7 +3,48 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Protocol Counsel",
-  description: "Legal protocol management platform",
+  description: "Legal Operations Orchestration Platform - HIPAA-compliant medical records retrieval, skip tracing, and mobile notary services.",
+  keywords: ["legal operations", "HIPAA compliant", "medical records", "notary services", "document retrieval"],
+  authors: [{ name: "Protocol Counsel" }],
+  creator: "Protocol Counsel",
+  publisher: "Protocol Counsel",
+  metadataBase: new URL("https://protocolcounsel.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://protocolcounsel.com",
+    siteName: "Protocol Counsel",
+    title: "Protocol Counsel - Legal Operations Orchestration Platform",
+    description: "HIPAA-compliant medical records retrieval with chain of custody documentation and immutable audit trails.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Protocol Counsel",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Protocol Counsel",
+    description: "Legal Operations Orchestration Platform",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -13,6 +54,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body>{children}</body>
     </html>
   );

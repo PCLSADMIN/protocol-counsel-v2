@@ -5,7 +5,7 @@ import { OrdersList } from "./orders-list";
 
 export const metadata: Metadata = {
   title: "Dashboard - Protocol Counsel",
-  description: "Order management dashboard",
+  description: "Secure order management and analytics dashboard",
 };
 
 async function getData(): Promise<{
@@ -42,7 +42,7 @@ export default async function DashboardPage() {
         <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
           Protocol Counsel Dashboard
         </h1>
-        <p style={{ color: "#666" }}>Order management and analytics</p>
+        <p style={{ color: "#666" }}>Secure order management and analytics</p>
       </header>
 
       {/* Status indicators */}
