@@ -34,7 +34,7 @@ export default function Home() {
     {
       icon: "⚡",
       title: "Instant Support",
-      description: "Both firms and signers have 24/7 access to our AI Dispatcher for immediate logistical answers.",
+      description: "Both firms and signers have 24/7 access to our Intelligent Orchestration for immediate logistical answers.",
     },
     {
       icon: "🔐",
