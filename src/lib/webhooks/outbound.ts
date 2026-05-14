@@ -1,8 +1,6 @@
 // Outbound Webhook Proxy - Push real-time updates to law firms
 // Signed with Protocol Counsel Header for verification
 
-import { headers } from "next/server";
-
 const WEBHOOK_SIGNATURE = "X-Protocol-Sign";
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || "pc_secret_key";
 

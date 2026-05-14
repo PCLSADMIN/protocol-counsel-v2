@@ -15,10 +15,12 @@ export interface SupportTicket {
   resolution?: string;
 }
 
-const AUTO_RESOLVE = {
+const AUTO_RESOLVE: Record<string, { resolved: boolean; msg: string }> = {
   LOGIN_ISSUE: { resolved: true, msg: "Magic link sent to email" },
   DNS_ISSUE: { resolved: false, msg: "Escalated to IT Staff" },
   API_ISSUE: { resolved: false, msg: "Escalated to API Team" },
+  PAYMENT_ISSUE: { resolved: false, msg: "Escalated to Billing Team" },
+  OTHER: { resolved: false, msg: "Ticket created" },
 };
 
 export async function createTicket(type: SupportTicketType, userId: string, desc: string, firmId?: string) {

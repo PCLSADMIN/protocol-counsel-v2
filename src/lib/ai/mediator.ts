@@ -3,7 +3,7 @@
 
 export interface MediatorsInput {
   rawMessage: string;
-  context?: " arrival" | "delivery" | "notary" | "general";
+  context?: "arrival" | "delivery" | "notary" | "general";
 }
 
 // Professional polish templates
@@ -59,7 +59,7 @@ export function logPolishedNote(polishedNote: string): string {
 }
 
 // Get client-facing note (no PII)
-export function getClientNote(rawMessage: string, context?: string): {
+export function getClientNote(rawMessage: string, context?: "arrival" | "delivery" | "notary" | "general"): {
   raw: string;
   polished: string;
   logged: string;

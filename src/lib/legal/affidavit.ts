@@ -45,6 +45,7 @@ function generateAffidavitId(): string {
 
 // Generate affidavit text
 export function generateAffidavitText(data: AffidavitData): string {
+  const affidavitId = "affidavitId" in data ? data.affidavitId : "GENERATING...";
   const formatDate = (d: Date) => d.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -63,7 +64,7 @@ export function generateAffidavitText(data: AffidavitData): string {
                     PROOF OF SERVICE AFFIDAVIT
 ══════════════════════════════════════════════════════════════════════════
 
-AFFIDAVIT ID: ${data.affidavitId || "GENERATING..."}
+AFFIDAVIT ID: ${affidavitId}
 ORDER #: ${data.orderNumber}
 CASE ID: ${data.caseId}
 
