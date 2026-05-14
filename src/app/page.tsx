@@ -52,6 +52,9 @@ export default function Home() {
         <a href="/portal/login" className="cta-button">
           Enter the Protocol
         </a>
+        <a href="/demo" className="demo-link">
+          Watch Demo
+        </a>
       </section>
 
       <section id="benefits">
