@@ -11,14 +11,20 @@ export interface VideoPlayerProps {
   title?: string;
 }
 
-export function DemoVideoPlayer({ videoUrl, title = "Platform Demo" }: VideoPlayerProps) {
-  const defaultScript: DemoScript[] = [
-    { timestamp: 0, text: "Welcome to ProtocolCounsel - Your Legal Operations Platform" },
-    { timestamp: 5, text: "Submit a request and instantly see our AI Scheduler activate" },
-    { timestamp: 12, text: "GPS Fence verification ensures 100m proof of visit" },
-    { timestamp: 18, text: "Auto-generated Cover Sheet and Affidavit ready for court" },
-    { timestamp: 25, text: "Finance Dashboard shows real-time P&L per client" },
-  ];
+// Full 2-3 minute demo script
+export const DEMO_SCRIPT: DemoScript[] = [
+  { timestamp: 0, text: "Legal operations shouldn't feel fragmented, delayed, or difficult. ProtocolCounsel brings intake, scheduling, document handling, field coordination, and billing into one secure workflow." },
+  { timestamp: 15, text: "SCENE 2 — LAW FIRM DASHBOARD: Designed for modern law firms, ProtocolCounsel centralizes every stage of the legal service process. From order placement to signed document return, every action is tracked, timestamped, and secured." },
+  { timestamp: 30, text: "SCENE 3 — ORDER CREATION: Create new service requests in seconds. Upload secure documents, assign service types, and manage signer instructions through a streamlined workflow." },
+  { timestamp: 45, text: "SCENE 4 — AI SCHEDULING ASSISTANT: ProtocolCounsel's AI coordination layer communicates with signers in real time. Appointments are scheduled automatically, updates are logged instantly." },
+  { timestamp: 60, text: "SCENE 5 — FIELD AGENT WORKFLOW: Field professionals receive assignments digitally and securely. Completed documents, notes, and status updates sync directly back into the firm portal." },
+  { timestamp: 75, text: "SCENE 6 — BILLING + CONTRACTS: Flexible enterprise billing options support both immediate payment and approved net terms. Subscription agreements and account activity are managed transparently." },
+  { timestamp: 90, text: "SCENE 7 — TRUST + SECURITY: Security, traceability, and operational reliability are built into every workflow. Every interaction is logged, every document secured, and every order fully auditable." },
+  { timestamp: 105, text: "FINAL: ProtocolCounsel. Legal operations—streamlined, automated, and built for scale. Secure your firm's workflow today." },
+];
+
+export function DemoVideoPlayer({ videoUrl, title = "ProtocolCounsel Demo" }: VideoPlayerProps) {
+  const script: DemoScript[] = DEMO_SCRIPT;
 
   return (
     <div className="demo-video-container">
@@ -31,16 +37,16 @@ export function DemoVideoPlayer({ videoUrl, title = "Platform Demo" }: VideoPlay
           <div className="video-placeholder">
             <div className="play-icon">▶</div>
             <p>Demo Video</p>
-            <p className="video-subtitle">Contact support@protocolcounsel.com for live demo</p>
+            <p className="video-subtitle">ProtocolCounsel Demo — Automated Legal Operations</p>
           </div>
         )}
       </div>
       <div className="script-panel">
-        <h4>{title} - Script</h4>
+        <h4>{title} — Script</h4>
         <ul className="script-list">
-          {defaultScript.map((line, i) => (
+          {script.map((line, i) => (
             <li key={i}>
-              <span className="timestamp">[{Math.floor(line.timestamp / 60)}:{(line.timestamp % 60).toString().padStart(2, "0")}]</span>
+              <span className="timestamp">[{Math.floor(line.timestamp / 60)}:{((line.timestamp % 60)).toString().padStart(2, "0")}]</span>
               <span className="text">{line.text}</span>
             </li>
           ))}
