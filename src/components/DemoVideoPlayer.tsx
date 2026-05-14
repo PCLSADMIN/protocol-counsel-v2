@@ -1,5 +1,7 @@
 // Demo Video Player with Script Display
 
+import { AnimatedPlaceholder } from "./AnimatedPlaceholder";
+
 export interface DemoScript {
   timestamp: number;
   text: string;
@@ -34,11 +36,7 @@ export function DemoVideoPlayer({ videoUrl, title = "ProtocolCounsel Demo" }: Vi
             Your browser does not support video.
           </video>
         ) : (
-          <div className="video-placeholder">
-            <div className="play-icon">▶</div>
-            <p>Demo Video</p>
-            <p className="video-subtitle">ProtocolCounsel Demo — Automated Legal Operations</p>
-          </div>
+          <AnimatedPlaceholder />
         )}
       </div>
       <div className="script-panel">
