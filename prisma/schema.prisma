@@ -253,6 +253,14 @@ model User {
   // Account status
   status             UserStatus @default(ACTIVE)
   
+  // Strict Neutrality Acknowledgments
+  acknowledgedPlatformIdentity Boolean @default(false)
+  acknowledgedDataSources     Boolean @default(false)
+  acknowledgedProcessIntegrity Boolean @default(false)
+  acknowledgedLiabilityShift  Boolean @default(false)
+  acknowledgedNoWarranties   Boolean @default(false)
+  acknowledgedAt           DateTime?
+  
   // Signup data
   bankAccountToken   String?  // Tokenized bank account
   creditCardToken   String?  // Tokenized credit card
