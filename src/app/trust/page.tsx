@@ -10,14 +10,14 @@ export default function TrustPage() {
     {
       name: "SOC 2 Type II",
       logo: "SOC2",
-      desc: "Security, Availability, Confidentiality",
+      desc: "Built on SOC 2 Type II Infrastructure",
       standards: "AICPA Trust Services Criteria",
       encryption: "AES-256 at rest, TLS 1.3 in transit",
     },
     {
-      name: "HIPAA",
+      name: "HIPAA-Ready",
       logo: "HIPAA",
-      desc: "Protected Health Information",
+      desc: "HIPAA-Ready Data Architecture",
       standards: "45 CFR Part 164",
       encryption: "AES-256, Business Associate Agreements",
     },
@@ -43,6 +43,8 @@ export default function TrustPage() {
     { value: "256-bit", label: "Encryption" },
     { value: "24/7", label: "Monitoring" },
   ];
+
+  const auditNote = "Protocol Counsel utilizes certified infrastructure providers. Platform-level certification is currently in-audit.";
 
   return (
     <main className="min-h-screen">
@@ -119,6 +121,10 @@ export default function TrustPage() {
               </div>
             ))}
           </div>
+          
+          <p className="text-xs text-slate-400 text-center mt-6 italic">
+            * {auditNote}
+          </p>
         </div>
       </section>
 

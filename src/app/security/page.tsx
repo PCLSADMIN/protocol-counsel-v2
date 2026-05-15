@@ -2,19 +2,19 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Security - PROTOCOL COUNSEL",
-  description: "Enterprise security standards. Zero-trust architecture, AES-256 encryption, SOC 2 Type II certified.",
+  description: "Enterprise security standards. Zero-trust architecture, AES-256 encryption, Built on SOC 2 Type II Infrastructure.",
 };
 
 export default function SecurityPage() {
   const certs = [
     {
       name: "SOC 2 Type II",
-      desc: "Security, Availability, Confidentiality",
+      desc: "Built on SOC 2 Type II Infrastructure*",
       standard: "AICPA Trust Services Criteria",
     },
     {
-      name: "HIPAA",
-      desc: "Protected Health Information",
+      name: "HIPAA-Ready",
+      desc: "HIPAA-Ready Data Architecture",
       standard: "45 CFR Part 164",
     },
     {
@@ -93,6 +93,9 @@ export default function SecurityPage() {
             ))}
           </div>
         </div>
+        <p className="text-xs text-slate-400 text-center mt-6 italic">
+          * Protocol Counsel utilizes certified infrastructure providers. Platform-level certification is currently in-audit.
+        </p>
       </section>
 
       <section className="py-20 bg-slate-50">

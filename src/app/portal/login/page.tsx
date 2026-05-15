@@ -147,10 +147,13 @@ function LoginForm() {
               We do not provide legal advice or legal services.
             </p>
             <div className="flex justify-center gap-4 text-xs text-slate-400">
-              <span>SOC 2</span>
-              <span>HIPAA</span>
+              <span>SOC 2*</span>
+              <span>HIPAA-Ready*</span>
               <span>ISO 27001</span>
             </div>
+            <p className="text-[10px] text-slate-400 text-center mt-2 italic">
+              * Infrastructure providers. Platform certification in-audit.
+            </p>
           </div>
         </div>
 

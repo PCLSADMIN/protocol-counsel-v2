@@ -1,18 +1,22 @@
 import Link from "next/link";
-import { DemoVideoPlayer } from "@/components/DemoVideoPlayer";
 import { ReputationDefender, TrustBar, StarRating } from "@/components/reputation/ReputationDefender";
 
 export default function Home() {
   const services = [
     {
+      title: "Medical Records Retrieval",
+      description: "HIPAA-compliant authorization routing with automated provider tracking and chain-of-custody documentation.",
+      icon: "Medical",
+    },
+    {
+      title: "Vital Records Fulfillment",
+      description: "Fast-track ordering for official state certificates required for active litigation and legal proceedings.",
+      icon: "Vital",
+    },
+    {
       title: "Automated Asset Recovery",
       description: "Intelligent retrieval with chain-of-custody documentation for legal proceedings.",
       icon: "Automated",
-    },
-    {
-      title: "Reverse Compliance",
-      description: "Preemptive regulatory checks ensuring every step meets current legal standards.",
-      icon: "Compliance",
     },
     {
       title: "Secure Document Vault",
@@ -215,20 +219,64 @@ export default function Home() {
               </div>
               <div className="card-elevated p-6">
                 <h3 className="font-semibold text-oxford mb-2">Enterprise Ready</h3>
-                <p className="text-slate-600 text-sm">SOC 2 Type II certified. HIPAA compliant. Built for firms handling sensitive legal operations at scale.</p>
+                <p className="text-slate-600 text-sm">Built on SOC 2 Type II Infrastructure*. HIPAA-Ready Data Architecture. Built for firms handling sensitive legal operations at scale.</p>
+                <p className="text-xs text-slate-400 mt-2 italic">* Platform-level certification is currently in-audit.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Demo Section */}
-      <section className="py-20 bg-white">
+      {/* Secure Legal Data Vault SVG */}
+      <section className="py-20 bg-oxford">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-serif font-bold text-oxford mb-4">See It In Action</h2>
-          <p className="text-slate-600 mb-8">Watch how ProtocolCounsel streamlines legal operations.</p>
-          <div className="text-left">
-            <DemoVideoPlayer title="Platform Demo" />
+          <svg className="w-64 h-64 mx-auto" viewBox="0 0 256 256" fill="none">
+            {/* Outer vault door */}
+            <rect x="32" y="48" width="192" height="160" rx="8" stroke="#D4AF37" strokeWidth="2" fill="none"/>
+            {/* Vault door circle */}
+            <circle cx="128" cy="128" r="56" stroke="#D4AF37" strokeWidth="2" fill="none"/>
+            {/* Inner vault circle */}
+            <circle cx="128" cy="128" r="36" stroke="#D4AF37" strokeWidth="1.5" fill="none"/>
+            {/* Center lock */}
+            <circle cx="128" cy="128" r="16" fill="#D4AF37" opacity="0.3"/>
+            <circle cx="128" cy="128" r="8" stroke="#D4AF37" strokeWidth="2" fill="none"/>
+            {/* Corner accents */}
+            <path d="M48 64 L48 48 L64 48" stroke="#D4AF37" strokeWidth="2"/>
+            <path d="M208 64 L208 48 L192 48" stroke="#D4AF37" strokeWidth="2"/>
+            <path d="M48 192 L48 208 L64 208" stroke="#D4AF37" strokeWidth="2"/>
+            <path d="M208 192 L208 208 L192 208" stroke="#D4AF37" strokeWidth="2"/>
+            {/* Side lock bars */}
+            <rect x="44" y="112" width="8" height="32" rx="2" fill="#D4AF37" opacity="0.6"/>
+            <rect x="204" y="112" width="8" height="32" rx="2" fill="#D4AF37" opacity="0.6"/>
+            {/* Status indicator */}
+            <circle cx="128" cy="224" r="6" fill="#D4AF37"/>
+          </svg>
+          <h2 className="text-2xl font-serif font-bold text-white mt-8">Secure Legal Data Vault</h2>
+          <p className="text-slate-400 mt-2">AES-256 Encrypted Infrastructure</p>
+        </div>
+      </section>
+
+      {/* Services Grid - Below Trust Bar */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-serif font-bold text-oxford mb-12 text-center">Core Services</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.slice(0, 4).map((service, i) => (
+              <div key={i} className="bg-white p-6 rounded-xl border border-slate-200 hover:border-[#D4AF37] transition-colors">
+                <div className="w-12 h-12 mb-4 rounded-lg bg-oxford flex items-center justify-center">
+                  <span className="text-[#D4AF37] font-bold text-sm">{service.title.substring(0, 2)}</span>
+                </div>
+                <h3 className="font-semibold text-oxford mb-2">{service.title}</h3>
+                <p className="text-slate-600 text-sm">{service.description}</p>
+              </div>
+            ))}
+          </div>
+          
+          {/* Liability Statement */}
+          <div className="mt-12 bg-oxford text-white p-6 rounded-lg text-center">
+            <p className="font-bold text-[#D4AF37]">
+              Protocol Counsel is a secure software infrastructure utility. All field operations, records retrieval, and legal services are executed exclusively by independent, licensed third-party professionals.
+            </p>
           </div>
         </div>
       </section>
@@ -265,7 +313,8 @@ export default function Home() {
           <div className="mt-6 flex justify-center gap-8 text-center">
             <div>
               <p className="text-2xl font-bold text-[#002147]">100%</p>
-              <p className="text-xs text-slate-500">SOC 2 Compliant</p>
+              <p className="text-xs text-slate-500">Build on SOC 2 Type II*</p>
+              <p className="text-[10px] text-slate-400 italic mt-1">* Infrastructure</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-[#002147]">24/7</p>
