@@ -37,13 +37,17 @@ export default function Home() {
       {/* Sticky Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <span className="text-xl font-serif font-bold text-oxford">ProtocolCounsel</span>
+          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">ProtocolCounsel</Link>
           <div className="flex items-center gap-6">
-            <Link href="#services" className="text-slate-600 hover:text-oxford text-sm">Services</Link>
-            <Link href="#dashboard" className="text-slate-600 hover:text-oxford text-sm">Dashboard</Link>
-            <Link href="/demo" className="text-slate-600 hover:text-oxford text-sm">Demo</Link>
-            <Link href="/portal/login" className="btn-gold text-sm">
-              Client Login
+            <Link href="/services" className="text-slate-600 hover:text-[#002147] text-sm">Services</Link>
+            <Link href="/security" className="text-slate-600 hover:text-[#002147] text-sm">Security</Link>
+            <Link href="/pricing" className="text-slate-600 hover:text-[#002147] text-sm">Pricing</Link>
+            <Link href="/trust" className="text-slate-600 hover:text-[#002147] text-sm">Trust</Link>
+            <Link href="/portal/login" className="border border-[#002147] text-[#002147] px-4 py-2 rounded text-sm hover:bg-[#002147] hover:text-white transition-colors">
+              Login
+            </Link>
+            <Link href="/demo" className="bg-[#D4AF37] text-[#002147] font-semibold px-5 py-2 rounded text-sm hover:bg-[#b8962f] transition-colors">
+              Request Demo
             </Link>
           </div>
         </div>
