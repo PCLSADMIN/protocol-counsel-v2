@@ -62,16 +62,16 @@ export default function ServicesPage() {
       {/* Sticky Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">PROTOCOL COUNSEL</Link>
+          <Link href="/" className="text-xl font-serif font-bold tracking-tight inline-flex items-center gap-2">PROTOCOL COUNSEL</Link>
           <div className="flex items-center gap-6">
-            <Link href="/services" className="text-[#002147] text-sm font-medium">Services</Link>
-            <Link href="/security" className="text-slate-600 hover:text-[#002147] text-sm">Security</Link>
-            <Link href="/pricing" className="text-slate-600 hover:text-[#002147] text-sm">Pricing</Link>
-            <Link href="/trust" className="text-slate-600 hover:text-[#002147] text-sm">Trust</Link>
-            <Link href="/portal/login" className="border border-[#002147] text-[#002147] px-4 py-2 rounded text-sm hover:bg-[#002147] hover:text-white transition-colors">
+            <Link href="/services" className="text-oxford text-sm font-medium">Services</Link>
+            <Link href="/security" className="text-slate-600 hover:text-oxford text-sm">Security</Link>
+            <Link href="/pricing" className="text-slate-600 hover:text-oxford text-sm">Pricing</Link>
+            <Link href="/trust" className="text-slate-600 hover:text-oxford text-sm">Trust</Link>
+            <Link href="/portal/login" className="border border-[#002147] text-oxford px-4 py-2 rounded text-sm hover:bg-[#002147] hover:text-white transition-colors">
               Login
             </Link>
-            <Link href="/demo" className="bg-[#D4AF37] text-[#002147] font-semibold px-5 py-2 rounded text-sm hover:bg-[#b8962f] transition-colors">
+            <Link href="/demo" className="bg-[#D4AF37] text-oxford font-semibold px-5 py-2 rounded text-sm hover:bg-[#b8962f] transition-colors">
               Request Demo
             </Link>
           </div>
@@ -81,7 +81,7 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="pt-32 pb-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-serif font-bold text-[#002147] mb-6">Service Architecture</h1>
+          <h1 className="text-5xl font-serif font-bold text-oxford mb-6">Service Architecture</h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Infrastructure modules connecting firms to licensed providers. Engineered for compliance, chain-of-custody documentation, and operational scale.
           </p>
@@ -100,7 +100,7 @@ export default function ServicesPage() {
                 <div className="w-14 h-14 mb-4 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200">
                   <span className="text-lg font-serif font-bold text-[#D4AF37]">{service.icon}</span>
                 </div>
-                <h3 className="text-xl font-semibold text-[#002147] mb-3">{service.title}</h3>
+                <h3 className="text-xl font-semibold text-oxford mb-3">{service.title}</h3>
                 <p className="text-slate-600 mb-4">{service.description}</p>
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, j) => (
@@ -110,7 +110,7 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/demo" className="text-[#002147] font-medium text-sm group-hover:underline">
+                <Link href="/demo" className="text-oxford font-medium text-sm group-hover:underline">
                   Learn More
                 </Link>
               </div>
@@ -125,7 +125,7 @@ export default function ServicesPage() {
           <h2 className="text-3xl font-serif font-bold text-white mb-4">Ready to streamline your operations?</h2>
           <p className="text-slate-300 mb-8">Schedule a personalized demo with our team.</p>
           <div className="flex justify-center gap-4">
-            <Link href="/demo" className="bg-[#D4AF37] text-[#002147] font-semibold px-8 py-3 rounded-md hover:bg-[#b8962f] transition-colors">
+            <Link href="/demo" className="bg-[#D4AF37] text-oxford font-semibold px-8 py-3 rounded-md hover:bg-[#b8962f] transition-colors">
               Request Demo
             </Link>
             <Link href="/pricing" className="border border-white text-white px-8 py-3 rounded-md hover:bg-white/10 transition-colors">

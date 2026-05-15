@@ -148,12 +148,12 @@ export default function CaseStudiesPage() {
                 <div className="md:w-2/3 p-8">
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-semibold text-[#002147]">Challenge</h4>
+                      <h4 className="font-semibold text-oxford">Challenge</h4>
                       <p className="text-slate-600 mt-2">{study.challenge}</p>
                     </div>
                     
                     <div>
-                      <h4 className="font-semibold text-[#002147]">Solution</h4>
+                      <h4 className="font-semibold text-oxford">Solution</h4>
                       <p className="text-slate-600 mt-2">{study.solution}</p>
                     </div>
                     
@@ -162,7 +162,7 @@ export default function CaseStudiesPage() {
                         "{study.quote}"
                       </blockquote>
                       <div className="mt-4">
-                        <div className="font-semibold text-[#002147]">{study.quotee}</div>
+                        <div className="font-semibold text-oxford">{study.quotee}</div>
                         <div className="text-sm text-slate-500">{study.quoteeTitle}</div>
                       </div>
                     </div>
@@ -180,7 +180,7 @@ export default function CaseStudiesPage() {
             Join 500+ firms already using Protocol Counsel to streamline their legal operations.
           </p>
           <div className="mt-8 flex gap-4 justify-center flex-wrap">
-            <Link href="/demo" className="px-8 py-3 bg-[#D4AF37] text-[#002147] rounded font-semibold hover:bg-[#b8962f]">
+            <Link href="/demo" className="px-8 py-3 bg-[#D4AF37] text-oxford rounded font-semibold hover:bg-[#b8962f]">
               Request Demo
             </Link>
             <Link href="/pricing" className="px-8 py-3 border border-white text-white rounded hover:bg-white/10">

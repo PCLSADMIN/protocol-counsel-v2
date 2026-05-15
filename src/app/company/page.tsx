@@ -29,7 +29,7 @@ export default function AboutPage() {
 
         {/* What We Do */}
         <div className="bg-white rounded-xl shadow-sm border p-8 mb-8">
-          <h2 className="text-xl font-semibold text-[#002147] mb-6">What We Do</h2>
+          <h2 className="text-xl font-semibold text-oxford mb-6">What We Do</h2>
           <p className="text-slate-600 mb-4">
             Protocol Counsel provides technology infrastructure that connects law firms with a network of licensed field service providers. 
             We don't deliver services ourselves—we build the secure, compliant rails that make modern legal operations possible.
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
         {/* Infrastructure Note */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 mb-8">
-          <h2 className="text-xl font-semibold text-[#002147] mb-4">Infrastructure, Not Services</h2>
+          <h2 className="text-xl font-semibold text-oxford mb-4">Infrastructure, Not Services</h2>
           <p className="text-slate-600">
             We are a technology company, not a law firm, process server, or investigation agency. 
             All legal services are delivered by licensed third-party providers in our network. 
@@ -55,28 +55,28 @@ export default function AboutPage() {
 
         {/* Values */}
         <div className="bg-white rounded-xl shadow-sm border p-8 mb-8">
-          <h2 className="text-xl font-semibold text-[#002147] mb-6">Our Values</h2>
+          <h2 className="text-xl font-semibold text-oxford mb-6">Our Values</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold text-[#002147]">Zero-Trust Security</h3>
+              <h3 className="font-semibold text-oxford">Zero-Trust Security</h3>
               <p className="text-slate-600 text-sm mt-1">
                 Every request verified. Every action logged. No exceptions.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#002147]">Compliance First</h3>
+              <h3 className="font-semibold text-oxford">Compliance First</h3>
               <p className="text-slate-600 text-sm mt-1">
                 Built for HIPAA, SOC 2, GDPR from day one.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#002147]">Provider Quality</h3>
+              <h3 className="font-semibold text-oxford">Provider Quality</h3>
               <p className="text-slate-600 text-sm mt-1">
                 Rigorous vetting of all field professionals.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#002147]">Financial Firewall</h3>
+              <h3 className="font-semibold text-oxford">Financial Firewall</h3>
               <p className="text-slate-600 text-sm mt-1">
                 Isolating billing data from operations by default.
               </p>
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
         {/* Team */}
         <div className="bg-white rounded-xl shadow-sm border p-8 mb-8">
-          <h2 className="text-xl font-semibold text-[#002147] mb-6">Leadership</h2>
+          <h2 className="text-xl font-semibold text-oxford mb-6">Leadership</h2>
           <p className="text-slate-600 mb-4">
             Our team combines decades of legal operations experience with deep technical expertise in 
             secure infrastructure.
@@ -96,21 +96,21 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-2 flex items-center justify-center">
                 <span className="text-2xl">👤</span>
               </div>
-              <div className="font-medium text-[#002147]">CEO</div>
+              <div className="font-medium text-oxford">CEO</div>
               <div className="text-xs text-slate-500">LegalTech Veteran</div>
             </div>
             <div className="p-4">
               <div className="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-2 flex items-center justify-center">
                 <span className="text-2xl">👤</span>
               </div>
-              <div className="font-medium text-[#002147]">CTO</div>
+              <div className="font-medium text-oxford">CTO</div>
               <div className="text-xs text-slate-500">Security Expert</div>
             </div>
             <div className="p-4">
               <div className="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-2 flex items-center justify-center">
                 <span className="text-2xl">👤</span>
               </div>
-              <div className="font-medium text-[#002147]">COO</div>
+              <div className="font-medium text-oxford">COO</div>
               <div className="text-xs text-slate-500">Legal Ops Leader</div>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function AboutPage() {
             Building the infrastructure for legal operations at scale.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/demo" className="px-6 py-2 bg-[#D4AF37] text-[#002147] rounded font-semibold">
+            <Link href="/demo" className="px-6 py-2 bg-[#D4AF37] text-oxford rounded font-semibold">
               Request Demo
             </Link>
             <Link href="/partners" className="px-6 py-2 border border-white text-white rounded">
