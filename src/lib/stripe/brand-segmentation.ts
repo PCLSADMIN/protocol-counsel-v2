@@ -1,4 +1,4 @@
-// Stripe Brand Segmentation - Isolate Protocol Counsel
+// Stripe Brand Segmentation - Streamline Industries Management
 
 export const STRIPE_CONFIG = {
   statementDescriptor: "PROTOCOL COUNSEL",
@@ -6,7 +6,7 @@ export const STRIPE_CONFIG = {
   businessProfile: {
     name: "ProtocolCounsel",
     phone: "+1-800-776-8329",
-    address: "123 Legal Plaza, Suite 400, Henderson, NV 89011",
+    address: "Distributed Operations | Nationwide Infrastructure",
     website: "https://protocolcounsel.com",
     email: "support@protocolcounsel.com",
   },

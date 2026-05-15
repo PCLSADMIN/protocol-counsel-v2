@@ -1,0 +1,44 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#002147"/>
+  <rect x="40" y="40" width="1120" height="550" rx="16" fill="#0a1628"/>
+  
+  <!-- Gold accent line top -->
+  <rect x="40" y="40" width="1120" height="4" fill="#D4AF37"/>
+  
+  <!-- Logo text -->
+  <text x="600" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#FFFFFF">
+    PROTOCOL
+  </text>
+  <text x="600" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#D4AF37">
+    COUNSEL
+  </text>
+  
+  <!-- Tagline -->
+  <text x="600" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" fill="#94A3B8">
+    Legal Operations Orchestration Platform
+  </text>
+  
+  <!-- Features -->
+  <rect x="120" y="380" width="293" height="120" rx="8" fill="#1E3A5F"/>
+  <text x="266" y="420" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#D4AF37">◆</text>
+  <text x="266" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#FFFFFF">HIPAA Compliant</text>
+  <text x="266" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">Process Service</text>
+  
+  <rect x="453" y="380" width="293" height="120" rx="8" fill="#1E3A5F"/>
+  <text x="600" y="420" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#D4AF37">◆</text>
+  <text x="600" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#FFFFFF">AI Scheduling</text>
+  <text x="600" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">Automation</text>
+  
+  <rect x="786" y="380" width="293" height="120" rx="8" fill="#1E3A5F"/>
+  <text x="933" y="420" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#D4AF37">◆</text>
+  <text x="933" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#FFFFFF">Secure Vault</text>
+  <text x="933" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">Document Storage</text>
+  
+  <!-- CTA -->
+  <text x="600" y="560" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#FFFFFF">
+    Streamline. Automate. Scale.
+  </text>
+  <text x="600" y="590" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#64748B">
+    protocolcounsel.com
+  </text>
+</svg>

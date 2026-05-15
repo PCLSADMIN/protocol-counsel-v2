@@ -10,6 +10,58 @@
   --gold: #D4AF37;
 }
 
+/* Skip Link for Keyboard Navigation */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+  padding: 1rem;
+  background: #002147;
+  color: white;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Visible Styles */
+:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   font-family: Inter, system-ui, -apple-system, sans-serif;
 }
@@ -48,7 +100,78 @@ body {
 
 .video-wrapper {
   background: #1a1a1a;
-  aspect-ratio: 16 / 9;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.demo-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.youtube-embed-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.youtube-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-notice {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.script-panel {
+  background: white;
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.script-panel h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #002147;
+  margin-bottom: 1rem;
+}
+
+.script-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.script-list li {
+  font-size: 0.75rem;
+  color: #666;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.script-list li:last-child {
+  border-bottom: none;
+}
+
+.script-list .timestamp {
+  color: #D4AF37;
+  font-weight: 600;
+  margin-right: 0.5rem;
 }
 
 .video-placeholder {
@@ -67,11 +190,6 @@ body {
   font-size: 0.85rem;
   color: #888;
   margin-top: 0.5rem;
-}
-
-.script-panel {
-  padding: 1rem;
-  background: #f9f9f9;
 }
 
 .script-panel h4 {

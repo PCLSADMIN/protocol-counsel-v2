@@ -1,0 +1,16 @@
+# Protocol Counsel Robots.txt
+# https://www.protocolcounsel.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.protocolcounsel.com/sitemap.xml
+
+# Disallow admin routes
+Disallow: /api/
+Disallow: /portal/
+Disallow: /admin/
+
+# Crawl-delay for rate limiting
+Crawl-delay: 1

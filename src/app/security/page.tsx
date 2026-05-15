@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Security - ProtocolCounsel",
+  title: "Security - PROTOCOL COUNSEL",
   description: "Enterprise security standards. Zero-trust architecture, AES-256 encryption, SOC 2 Type II certified.",
 };
 
@@ -52,7 +52,7 @@ export default function SecurityPage() {
     <main className="min-h-screen">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">ProtocolCounsel</Link>
+          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">PROTOCOL COUNSEL</Link>
           <div className="flex items-center gap-6">
             <Link href="/services" className="text-slate-600 hover:text-[#002147] text-sm">Services</Link>
             <Link href="/security" className="text-[#002147] text-sm font-medium">Security</Link>
@@ -72,7 +72,7 @@ export default function SecurityPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-serif font-bold text-[#002147] mb-6">Security & Compliance</h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Enterprise-grade security baked into every workflow. Zero-trust architecture from the ground up.
+            Enterprise security architecture. Zero-trust framework with end-to-end encryption and regulatory compliance.
           </p>
         </div>
       </section>
@@ -81,8 +81,12 @@ export default function SecurityPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {certs.map((cert, i) => (
-              <div key={i} className="bg-slate-50 p-6 rounded-lg text-center">
-                <div className="text-2xl font-bold text-[#002147] mb-2">{cert.name}</div>
+              <div key={i} className="bg-slate-50 p-6 rounded-lg text-center border border-slate-200">
+                {/* Certificate Badge */}
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#002147] flex items-center justify-center">
+                  <div className="text-[#D4AF37] font-bold text-lg">{cert.name.substring(0, 2)}</div>
+                </div>
+                <div className="text-xl font-bold text-[#002147] mb-2">{cert.name}</div>
                 <p className="text-sm text-slate-600">{cert.desc}</p>
                 <p className="text-xs text-slate-400 mt-2">{cert.standard}</p>
               </div>
@@ -96,6 +100,10 @@ export default function SecurityPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, i) => (
               <div key={i} className="bg-white border border-slate-200 p-6 rounded-lg">
+                {/* Feature Icon Badge */}
+                <div className="w-12 h-12 mb-4 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200">
+                  <div className="w-3 h-3 bg-[#D4AF37] rounded-full"></div>
+                </div>
                 <h3 className="text-lg font-semibold text-[#002147] mb-2">{feature.title}</h3>
                 <p className="text-slate-600">{feature.desc}</p>
               </div>
@@ -116,7 +124,7 @@ export default function SecurityPage() {
 
       <footer className="bg-slate-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6 text-center text-slate-400 text-sm">
-          <p>© {new Date().getFullYear()} ProtocolCounsel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PROTOCOL COUNSEL. All rights reserved.</p>
         </div>
       </footer>
     </main>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Trust Center - ProtocolCounsel",
+  title: "Trust Center - PROTOCOL COUNSEL",
   description: "Compliance certifications, encryption standards, and data residency policies.",
 };
 
@@ -48,7 +48,7 @@ export default function TrustPage() {
     <main className="min-h-screen">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">ProtocolCounsel</Link>
+          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">PROTOCOL COUNSEL</Link>
           <div className="flex items-center gap-6">
             <Link href="/services" className="text-slate-600 hover:text-[#002147] text-sm">Services</Link>
             <Link href="/security" className="text-slate-600 hover:text-[#002147] text-sm">Security</Link>
@@ -70,6 +70,11 @@ export default function TrustPage() {
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Transparency in security. View our certifications, encryption standards, and data practices.
           </p>
+          <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg max-w-2xl mx-auto">
+            <p className="text-sm text-yellow-800">
+              <strong>Important:</strong> Protocol Counsel provides technology infrastructure. Our platform certifications apply to our technology and data handling—not to services performed by third-party providers. Each licensed provider maintains their own compliance.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -161,7 +166,7 @@ export default function TrustPage() {
 
       <footer className="bg-slate-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6 text-center text-slate-400 text-sm">
-          <p>© {new Date().getFullYear()} ProtocolCounsel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PROTOCOL COUNSEL. All rights reserved.</p>
         </div>
       </footer>
     </main>

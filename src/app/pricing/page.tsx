@@ -1,13 +1,21 @@
+'use client';
+
 import { useState } from "react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Pricing - ProtocolCounsel",
-  description: "Flexible pricing for firms of all sizes. Standard, Institutional, and Sovereign tiers.",
+// Stripe Price IDs (replace with actual Stripe price IDs in production)
+const STRIPE_PRICES = {
+  standard_monthly: 'price_standard_monthly',
+  standard_annual: 'price_standard_annual',
+  institutional_monthly: 'price_institutional_monthly',
+  institutional_annual: 'price_institutional_annual',
+  sovereign_monthly: 'price_sovereign_monthly',
+  sovereign_annual: 'price_sovereign_annual',
 };
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(true);
+  const [loading, setLoading] = useState<string | null>(null);
 
   const tiers = [
     {
@@ -15,6 +23,7 @@ export default function PricingPage() {
       desc: "For boutique firms",
       monthly: 499,
       annual: 399,
+      priceId: annual ? STRIPE_PRICES.standard_annual : STRIPE_PRICES.standard_monthly,
       features: [
         "Up to 100 orders/month",
         "AI Scheduling",
@@ -29,6 +38,7 @@ export default function PricingPage() {
       monthly: 1499,
       annual: 1199,
       popular: true,
+      priceId: annual ? STRIPE_PRICES.institutional_annual : STRIPE_PRICES.institutional_monthly,
       features: [
         "Unlimited orders",
         "Custom Regulatory Rails",
@@ -44,6 +54,7 @@ export default function PricingPage() {
       desc: "White-glove field coordination",
       monthly: 3499,
       annual: 2799,
+      priceId: annual ? STRIPE_PRICES.sovereign_annual : STRIPE_PRICES.sovereign_monthly,
       features: [
         "Everything in Institutional",
         "Dedicated account manager",
@@ -56,11 +67,43 @@ export default function PricingPage() {
     },
   ];
 
+  // Stripe Checkout Handler
+  const handleCheckout = async (tier: typeof tiers[0]) => {
+    setLoading(tier.name);
+    
+    try {
+      // Call checkout API
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: tier.priceId,
+          tier: tier.name,
+          billing: annual ? 'annual' : 'monthly',
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        // Demo mode - show success message
+        alert(`Demo: Would redirect to Stripe Checkout for ${tier.name} (${annual ? 'annual' : 'monthly'}) at $${annual ? tier.annual : tier.monthly}/month`);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+    } finally {
+      setLoading(null);
+    }
+  };
+
   return (
     <main className="min-h-screen">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">ProtocolCounsel</Link>
+          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">PROTOCOL COUNSEL</Link>
           <div className="flex items-center gap-6">
             <Link href="/services" className="text-slate-600 hover:text-[#002147] text-sm">Services</Link>
             <Link href="/security" className="text-slate-600 hover:text-[#002147] text-sm">Security</Link>
@@ -81,6 +124,9 @@ export default function PricingPage() {
           <h1 className="text-5xl font-serif font-bold text-[#002147] mb-6">Pricing</h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
             Flexible plans for firms of all sizes. No hidden fees.
+          </p>
+          <p className="text-xs text-slate-500 mb-4">
+            ⚠️ Platform fees only. Service fees are set by third-party providers.
           </p>
           
           <div className="flex justify-center items-center gap-4">
@@ -121,9 +167,13 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/demo" className={`block text-center py-3 rounded-md transition-colors ${tier.popular ? "bg-[#D4AF37] text-[#002147] hover:bg-[#b8962f]" : "bg-[#002147] text-white hover:bg-slate-700"}`}>
-                  Get Started
-                </Link>
+                <button 
+                  onClick={() => handleCheckout(tier)}
+                  disabled={loading === tier.name}
+                  className={`w-full py-3 rounded-md transition-colors disabled:opacity-50 ${tier.popular ? "bg-[#D4AF37] text-[#002147] hover:bg-[#b8962f]" : "bg-[#002147] text-white hover:bg-slate-700"}`}
+                >
+                  {loading === tier.name ? 'Processing...' : 'Get Started'}
+                </button>
               </div>
             ))}
           </div>
@@ -142,7 +192,7 @@ export default function PricingPage() {
 
       <footer className="bg-slate-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6 text-center text-slate-400 text-sm">
-          <p>© {new Date().getFullYear()} ProtocolCounsel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PROTOCOL COUNSEL. All rights reserved.</p>
         </div>
       </footer>
     </main>

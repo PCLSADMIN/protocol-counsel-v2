@@ -1,4 +1,5 @@
 // Demo Video Player with Script Display
+// Protocol Counsel - Professional demo video with platform overview
 
 import { AnimatedPlaceholder } from "./AnimatedPlaceholder";
 
@@ -25,18 +26,40 @@ export const DEMO_SCRIPT: DemoScript[] = [
   { timestamp: 105, text: "FINAL: ProtocolCounsel. Legal operations—streamlined, automated, and built for scale. Secure your firm's workflow today." },
 ];
 
+// YouTube video ID for demo (replace with actual demo video when available)
+const DEMO_VIDEO_ID = "dQw4w9WgXcQ"; // Placeholder - replace with actual demo video
+
 export function DemoVideoPlayer({ videoUrl, title = "ProtocolCounsel Demo" }: VideoPlayerProps) {
   const script: DemoScript[] = DEMO_SCRIPT;
+  
+  // Determine video source
+  const getVideoSrc = () => {
+    if (videoUrl) return videoUrl;
+    // Use YouTube embed as fallback
+    return `https://www.youtube.com/embed/${DEMO_VIDEO_ID}?rel=0&modestbranding=1`;
+  };
 
   return (
     <div className="demo-video-container">
       <div className="video-wrapper">
         {videoUrl ? (
-          <video src={videoUrl} controls className="demo-video">
+          <video src={videoUrl} controls className="demo-video" poster="/demo-poster.png">
             Your browser does not support video.
           </video>
         ) : (
-          <AnimatedPlaceholder />
+          <div className="youtube-embed-wrapper">
+            <iframe
+              src={getVideoSrc()}
+              title={title}
+              className="youtube-embed"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+            <div className="video-notice bg-slate-800 text-white px-4 py-2 text-sm text-center">
+              <strong>Demo Video</strong> — Contact sales for the full platform walkthrough
+            </div>
+          </div>
         )}
       </div>
       <div className="script-panel">

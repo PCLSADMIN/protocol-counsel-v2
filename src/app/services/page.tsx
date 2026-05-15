@@ -1,47 +1,59 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Services - ProtocolCounsel",
+  title: "Services - PROTOCOL COUNSEL",
   description: "Enterprise-grade legal operations services. Automated asset recovery, reverse compliance, secure document vault, and field coordination.",
 };
 
 export default function ServicesPage() {
   const services = [
     {
-      title: "Automated Asset Recovery",
-      description: "Intelligent retrieval with chain-of-custody documentation for legal proceedings. Real-time tracking from request to completion.",
-      features: ["GPS-verified proof of service", "Automated cover sheet generation", "Immutable audit trails"],
-      icon: "⚡",
+      title: "Process Service",
+      description: "Professional service of process with chain-of-custody documentation. GPS-verified delivery and complete due diligence for legal proceedings.",
+      features: ["Nationwide coverage", "GPS-verified proof of service", "Immutable audit trails"],
+      icon: "Service",
     },
     {
-      title: "Reverse Compliance",
-      description: "Preemptive regulatory checks ensuring every step meets current legal standards. Proactive risk mitigation.",
-      features: ["CA SB 53 ready", "CO AI Act compliant", "Real-time validation"],
-      icon: "🔄",
+      title: "Skip Trace",
+      description: "Professional person locator using advanced investigative databases. Comprehensive skip tracing for legal proceedings and debt collection.",
+      features: ["Multi-database verification", "Current & historical addresses", "Employment indicators"],
+      icon: "Search",
+    },
+    {
+      title: "Property Report",
+      description: "Comprehensive property ownership and status reports. Professional real estate due diligence for legal matters.",
+      features: ["Ownership verification", "Chain of title", "Tax & lien status"],
+      icon: "Property",
+    },
+    {
+      title: "Asset Investigation",
+      description: "Comprehensive asset searches and financial due diligence. Locate and verify assets for judgment enforcement.",
+      features: ["Bankruptcy records", "UCC filings", "Intangible assets"],
+      icon: "Asset",
     },
     {
       title: "Secure Document Vault",
-      description: "AES-256 encrypted storage with immutable audit trails for every interaction. Zero-trust architecture.",
+      description: "AES-256 encrypted storage with immutable audit trails. Zero-trust architecture for sensitive legal documents.",
       features: ["End-to-end encryption", "90-day key rotation", "SOC 2 Type II certified"],
-      icon: "🔐",
+      icon: "Vault",
     },
     {
       title: "Field Coordination",
       description: "Real-time assignment and tracking for mobile legal professionals. Nationwide network coverage.",
       features: ["Live GPS tracking", "Push notifications", "Mobile-optimized interface"],
-      icon: "📍",
+      icon: "Field",
     },
     {
       title: "AI Scheduling Assistant",
       description: "Automated appointment scheduling within signer time windows. SMS/voice confirmations.",
       features: ["8 AM - 8 PM local windows", "3 retry attempts", "Calendar integration"],
-      icon: "🤖",
+      icon: "AI",
     },
     {
       title: "Trust Ledger",
       description: "Immutable transaction log for billing and escrow. Prepaid credits and Net 30 terms.",
-     features: ["Real-time P&L", "LEDES export", "Stripe integration"],
-      icon: "📊",
+      features: ["Real-time P&L", "LEDES export", "Stripe integration"],
+      icon: "Ledger",
     },
   ];
 
@@ -50,7 +62,7 @@ export default function ServicesPage() {
       {/* Sticky Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">ProtocolCounsel</Link>
+          <Link href="/" className="text-xl font-serif font-bold text-[#002147]">PROTOCOL COUNSEL</Link>
           <div className="flex items-center gap-6">
             <Link href="/services" className="text-[#002147] text-sm font-medium">Services</Link>
             <Link href="/security" className="text-slate-600 hover:text-[#002147] text-sm">Security</Link>
@@ -71,7 +83,10 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-serif font-bold text-[#002147] mb-6">Service Architecture</h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Enterprise-grade components for modern legal operations. Each module built for precision, security, and compliance.
+            Infrastructure modules connecting firms to licensed providers. Engineered for compliance, chain-of-custody documentation, and operational scale.
+          </p>
+          <p className="text-slate-500 text-sm mt-4">
+            ⚠️ Protocol Counsel provides technology infrastructure. All services delivered by licensed third-party providers.
           </p>
         </div>
       </section>
@@ -82,7 +97,9 @@ export default function ServicesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
               <div key={i} className="group bg-white border border-slate-200 p-8 rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div className="text-4xl mb-4">{service.icon}</div>
+                <div className="w-14 h-14 mb-4 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200">
+                  <span className="text-lg font-serif font-bold text-[#D4AF37]">{service.icon}</span>
+                </div>
                 <h3 className="text-xl font-semibold text-[#002147] mb-3">{service.title}</h3>
                 <p className="text-slate-600 mb-4">{service.description}</p>
                 <ul className="space-y-2 mb-6">
@@ -94,7 +111,7 @@ export default function ServicesPage() {
                   ))}
                 </ul>
                 <Link href="/demo" className="text-[#002147] font-medium text-sm group-hover:underline">
-                  Learn More →
+                  Learn More
                 </Link>
               </div>
             ))}
@@ -121,7 +138,7 @@ export default function ServicesPage() {
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6 text-center text-slate-400 text-sm">
-          <p>© {new Date().getFullYear()} ProtocolCounsel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PROTOCOL COUNSEL. All rights reserved.</p>
         </div>
       </footer>
     </main>
