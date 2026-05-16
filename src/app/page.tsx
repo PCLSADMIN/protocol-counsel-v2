@@ -1,13 +1,6 @@
 import Link from "next/link";
 
 export default function Home() {
-  const stats = [
-    { value: "50,000+", label: "Law Firms Served" },
-    { value: "2M+", label: "Documents Processed" },
-    { value: "99.9%", label: "Platform Uptime" },
-    { value: "$500M+", label: "Client Recoveries" },
-  ];
-
   const services = [
     {
       title: "Medical Records Retrieval",
@@ -15,160 +8,291 @@ export default function Home() {
       icon: "📋",
     },
     {
-      title: "Vital Records",
-      description: "Fast-track fulfillment of official state certificates for active litigation.",
+      title: "Vital Records Fulfillment",
+      description: "Fast-track ordering for official state certificates required for active litigation.",
       icon: "📜",
     },
     {
       title: "Asset Discovery",
-      description: "Comprehensive retrieval with full audit trails for legal discovery.",
+      description: "Comprehensive retrieval with full audit trails for legal discovery and recovery.",
       icon: "🔍",
     },
     {
-      title: "Secure Vault",
-      description: "AES-256 encrypted storage with immutable compliance logging.",
+      title: "Secure Document Vault",
+      description: "AES-256 encrypted storage with immutable compliance logging for all records.",
       icon: "🔐",
     },
   ];
 
-  const trustBadges = ["SOC 2 Type II", "HIPAA Certified", "ISO 27001", "GDPR Ready"];
-
   return (
-    <main className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-11 h-11 bg-[#002147] rounded-lg flex items-center justify-center shadow-lg">
-              <span className="text-[#D4AF37] font-bold text-xl">PC</span>
+    <main style={{ minHeight: '100vh', backgroundColor: '#0f172a' }}>
+      {/* HEADER - Brand & Utility Nav */}
+      <nav style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #1e293b'
+      }}>
+        <div style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '20px 32px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          {/* Brand Insignia */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* Geometric Line-Shield Monogram */}
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              {/* Outer shield */}
+              <path d="M22 2L40 10V28C40 36 32 42 22 44C12 42 4 36 4 28V10L22 2Z" 
+                fill="#1e293b" stroke="#D4AF37" strokeWidth="2"/>
+              {/* Inner shield accent */}
+              <path d="M22 8L34 14V26C34 32 29 36 22 38C15 36 10 32 10 26V14L22 8Z" 
+                fill="none" stroke="#E2E8F0" strokeWidth="1"/>
+              {/* Center PC monogram */}
+              <text x="22" y="27" textAnchor="middle" fill="#D4AF37" 
+                fontSize="14" fontWeight="800" fontFamily="Arial">PC</text>
+              {/* Scale lines */}
+              <line x1="14" y1="32" x2="30" y2="32" stroke="#D4AF37" strokeWidth="1"/>
+              <line x1="16" y1="35" x2="28" y2="35" stroke="#E2E8F0" strokeWidth="0.5"/>
+            </svg>
+            
+            {/* Wordmark */}
+            <div>
+              <span style={{ color: '#E2E8F0', fontWeight: '800', letterSpacing: '0.05em', fontSize: '18px' }}>
+                PROTOCOL
+              </span>
+              <span style={{ color: '#D4AF37', fontWeight: '800', fontSize: '18px', marginLeft: '8px' }}>
+                COUNSEL
+              </span>
             </div>
-            <div className="hidden sm:block">
-              <span className="text-[#002147] font-bold tracking-tight">PROTOCOL COUNSEL</span>
-            </div>
-          </Link>
-          
-          <div className="hidden lg:flex items-center gap-8">
-            <Link href="/services" className="text-sm text-slate-600 hover:text-[#002147] font-medium">Services</Link>
-            <Link href="/pricing" className="text-sm text-slate-600 hover:text-[#002147] font-medium">Pricing</Link>
-            <Link href="/case-studies" className="text-sm text-slate-600 hover:text-[#002147] font-medium">Case Studies</Link>
-            <Link href="/security" className="text-sm text-slate-600 hover:text-[#002147] font-medium">Security</Link>
           </div>
-          
-          <div className="flex items-center gap-3">
-            <Link href="/portal/login" className="text-sm font-medium text-slate-600 hover:text-[#002147] hidden sm:block">
-              Sign In
+
+          {/* Utility Navigation */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+            <Link href="/services" style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '500', textDecoration: 'none' }}>
+              Services
             </Link>
-            <Link href="/demo" className="bg-[#D4AF37] text-[#002147] px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#c9a430] transition-all shadow-md">
-              Get Started
+            <Link href="/pricing" style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '500', textDecoration: 'none' }}>
+              Pricing
+            </Link>
+            <Link href="/security" style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '500', textDecoration: 'none' }}>
+              Security
+            </Link>
+            <Link href="/company" style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '500', textDecoration: 'none' }}>
+              Company
+            </Link>
+          </div>
+
+          {/* CTA Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <Link href="/portal/login" style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600', textDecoration: 'none' }}>
+              Client Portal
+            </Link>
+            <Link href="/demo" style={{
+              backgroundColor: '#D4AF37',
+              color: '#0f172a',
+              padding: '10px 24px',
+              borderRadius: '6px',
+              fontSize: '14px',
+              fontWeight: '700',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)'
+            }}>
+              Request Demo
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-slate-50 via-white to-amber-50/30 relative overflow-hidden">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-[#002147]/5 rounded-full blur-3xl"></div>
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#002147]/5 px-4 py-2 rounded-full mb-6">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-sm font-medium text-slate-600">Enterprise Legal Infrastructure</span>
+      {/* HERO - Two-Column Grid */}
+      <section style={{
+        paddingTop: '140px',
+        paddingBottom: '80px',
+        backgroundColor: '#0f172a'
+      }}>
+        <div style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '0 32px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '64px',
+          alignItems: 'center'
+        }}>
+          {/* Left Canvas - Value Proposition */}
+          <div>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: 'rgba(212, 175, 55, 0.1)',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              marginBottom: '24px',
+              border: '1px solid rgba(212, 175, 55, 0.3)'
+            }}>
+              <span style={{ width: '8px', height: '8px', backgroundColor: '#22c55e', borderRadius: '50%' }}></span>
+              <span style={{ color: '#94a3b8', fontSize: '13px', fontWeight: '500' }}>Enterprise Legal Infrastructure</span>
+            </div>
+
+            <h1 style={{
+              fontSize: 'clamp(36px, 5vw, 64px)',
+              fontWeight: '800',
+              lineHeight: '1.1',
+              marginBottom: '24px',
+              color: '#f8fafc'
+            }}>
+              Legal Operations,<br />
+              <span style={{ color: '#D4AF37' }}>Institutional Grade.</span>
+            </h1>
+
+            <p style={{
+              fontSize: '18px',
+              lineHeight: '1.7',
+              color: '#94a3b8',
+              marginBottom: '32px',
+              maxWidth: '480px'
+            }}>
+              The enterprise platform for law firms who demand compliance, efficiency, and results. HIPAA-compliant retrieval, chain-of-custody documentation, and real-time compliance monitoring—all through a single secure platform.
+            </p>
+
+            {/* CTAs */}
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '32px' }}>
+              <Link href="/demo" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#D4AF37',
+                color: '#0f172a',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '700',
+                textDecoration: 'none',
+                boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
+              }}>
+                Schedule Consultation
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link href="/portal/signup" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                border: '2px solid #334155',
+                color: '#e2e8f0',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+                textDecoration: 'none'
+              }}>
+                View Pricing
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div style={{ display: 'flex', gap: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="20" height="20" fill="#22c55e" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span style={{ color: '#64748b', fontSize: '13px' }}>SOC 2 Certified</span>
               </div>
-              
-              <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-[#002147] leading-[1.1] mb-6">
-                Legal Operations,<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#002147] to-[#D4AF37]">Elevated.</span>
-              </h1>
-              
-              <p className="text-xl text-slate-600 leading-relaxed mb-8 max-w-xl">
-                The enterprise platform for law firms who demand compliance, efficiency, and results. HIPAA-compliant retrieval, chain-of-custody documentation, and real-time monitoring.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link href="/demo" className="inline-flex items-center justify-center gap-2 bg-[#002147] text-white px-8 py-4 rounded-full text-base font-semibold hover:bg-[#003366] transition-all shadow-xl">
-                  Schedule Consultation
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-                <Link href="/portal/signup" className="inline-flex items-center justify-center gap-2 border-2 border-[#002147] text-[#002147] px-8 py-4 rounded-full text-base font-semibold hover:bg-[#002147] hover:text-white transition-all">
-                  View Pricing
-                </Link>
-              </div>
-              
-              <div className="flex items-center gap-6 text-sm text-slate-500">
-                <span className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  No credit card required
-                </span>
-                <span className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  SOC 2 certified
-                </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="20" height="20" fill="#22c55e" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span style={{ color: '#64748b', fontSize: '13px' }}>No Setup Fees</span>
               </div>
             </div>
-            
-            {/* Dashboard Preview Card */}
-            <div className="relative hidden lg:block">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#001a36] rounded-3xl shadow-2xl transform rotate-3"></div>
-              <div className="relative bg-gradient-to-br from-[#002147] to-[#001a36] rounded-3xl shadow-2xl p-8 text-white">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 bg-[#D4AF37] rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#002147]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Platform Status</p>
-                    <p className="text-green-400 text-sm flex items-center gap-1">
-                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                      All systems operational
-                    </p>
-                  </div>
-                </div>
+          </div>
+
+          {/* Right Canvas - Scales of Justice */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <div style={{
+              backgroundColor: '#1e293b',
+              borderRadius: '16px',
+              padding: '48px',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+              border: '1px solid #334155'
+            }}>
+              {/* Scales of Justice SVG */}
+              <svg width="450" height="450" viewBox="0 0 100 100" style={{ stroke: '#D4AF37', strokeWidth: '1.2', fill: 'none' }}>
+                {/* Center pillar */}
+                <rect x="48" y="8" width="4" height="70" fill="#D4AF37" opacity="0.8"/>
                 
-                <div className="space-y-4">
-                  <div className="bg-white/10 rounded-xl p-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-slate-300">Today's Requests</span>
-                      <span className="text-2xl font-bold text-[#D4AF37]">1,247</span>
-                    </div>
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-[#D4AF37] h-2 rounded-full w-3/4"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/10 rounded-xl p-4">
-                      <p className="text-slate-300 text-sm">Avg. Response</p>
-                      <p className="text-xl font-bold">2.4s</p>
-                    </div>
-                    <div className="bg-white/10 rounded-xl p-4">
-                      <p className="text-slate-300 text-sm">Success Rate</p>
-                      <p className="text-xl font-bold text-green-400">99.8%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                {/* Base */}
+                <rect x="35" y="76" width="30" height="6" rx="2" fill="#D4AF37"/>
+                <rect x="40" y="70" width="20" height="8" fill="none" stroke="#D4AF37" strokeWidth="1"/>
+                
+                {/* Top beam */}
+                <rect x="8" y="18" width="84" height="4" rx="1" fill="#D4AF37"/>
+                
+                {/* Left pan chains */}
+                <line x1="18" y1="22" x2="18" y2="45" stroke="#D4AF37" strokeWidth="0.8"/>
+                <line x1="22" y1="22" x2="22" y2="45" stroke="#D4AF37" strokeWidth="0.8"/>
+                
+                {/* Right pan chains */}
+                <line x1="78" y1="22" x2="78" y2="45" stroke="#D4AF37" strokeWidth="0.8"/>
+                <line x1="82" y1="22" x2="82" y2="45" stroke="#D4AF37" strokeWidth="0.8"/>
+                
+                {/* Left pan */}
+                <ellipse cx="20" cy="50" rx="14" ry="6" fill="none" stroke="#D4AF37" strokeWidth="1.5"/>
+                <line x1="6" y1="50" x2="34" y2="50" stroke="#D4AF37" strokeWidth="0.5" strokeDasharray="2,2"/>
+                
+                {/* Right pan */}
+                <ellipse cx="80" cy="50" rx="14" ry="6" fill="none" stroke="#D4AF37" strokeWidth="1.5"/>
+                <line x1="66" y1="50" x2="94" y2="50" stroke="#D4AF37" strokeWidth="0.5" strokeDasharray="2,2"/>
+                
+                {/* Crown/pommel */}
+                <circle cx="50" cy="14" r="4" fill="#D4AF37"/>
+                <circle cx="50" cy="14" r="2" fill="#0f172a"/>
+                
+                {/* Decorative horizontal lines on pillar */}
+                <line x1="46" y1="35" x2="54" y2="35" stroke="#D4AF37" strokeWidth="0.5"/>
+                <line x1="46" y1="45" x2="54" y2="45" stroke="#D4AF37" strokeWidth="0.5"/>
+                <line x1="46" y1="55" x2="54" y2="55" stroke="#D4AF37" strokeWidth="0.5"/>
+                
+                {/* Corner accents - top left */}
+                <path d="M5 5 L5 12 M5 5 L12 5" stroke="#D4AF37" strokeWidth="1"/>
+                {/* Corner accents - top right */}
+                <path d="M95 5 L95 12 M95 5 L88 5" stroke="#D4AF37" strokeWidth="1"/>
+                {/* Corner accents - bottom left */}
+                <path d="M5 95 L5 88 M5 95 L12 95" stroke="#D4AF37" strokeWidth="1"/>
+                {/* Corner accents - bottom right */}
+                <path d="M95 95 L95 88 M95 95 L88 95" stroke="#D4AF37" strokeWidth="1"/>
+                
+                {/* Text label */}
+                <text x="50" y="95" textAnchor="middle" fill="#94a3b8" fontSize="3" fontFamily="Arial">SCALES OF JUSTICE</text>
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className="py-6 bg-[#002147]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 items-center">
-            <span className="text-white/60 text-sm font-medium tracking-wider uppercase">Trusted Infrastructure</span>
-            {trustBadges.map((badge, i) => (
-              <span key={i} className="text-white/90 text-sm font-semibold flex items-center gap-2">
-                <svg className="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+      {/* TRUST BAR */}
+      <section style={{ backgroundColor: '#1e293b', padding: '24px 0', borderTop: '1px solid #334155', borderBottom: '1px solid #334155' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '40px' }}>
+            <span style={{ color: '#64748b', fontSize: '12px', fontWeight: '600', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Trusted Infrastructure
+            </span>
+            {['SOC 2 Type II', 'HIPAA Certified', 'ISO 27001', 'GDPR Ready', '21 CFR Part 11'].map((badge, i) => (
+              <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#e2e8f0', fontSize: '14px', fontWeight: '500' }}>
+                <svg width="16" height="16" fill="#D4AF37" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 {badge}
@@ -178,128 +302,192 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-4xl lg:text-5xl font-bold text-[#002147] mb-2">{stat.value}</p>
-                <p className="text-sm text-slate-500 uppercase tracking-wider font-medium">{stat.label}</p>
+      {/* STAT
+      {/* STATS SECTION */}
+      <section style={{ backgroundColor: '#0f172a', padding: '80px 0' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '48px' }}>
+            {[
+              { value: '50,000+', label: 'Law Firms Served' },
+              { value: '2M+', label: 'Documents Processed' },
+              { value: '99.9%', label: 'Platform Uptime' },
+              { value: '$500M+', label: 'Client Recoveries' },
+            ].map((stat, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <p style={{ fontSize: '48px', fontWeight: '800', color: '#D4AF37', marginBottom: '8px' }}>{stat.value}</p>
+                <p style={{ fontSize: '13px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-2xl mb-16">
-            <p className="text-[#D4AF37] font-semibold tracking-widest text-sm mb-4 uppercase">Core Platform</p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#002147] mb-4">
-              Everything You Need.<br />Nothing You Don't.
+      {/* CORE PRODUCT TILES */}
+      <section style={{ backgroundColor: '#0f172a', padding: '80px 0' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ marginBottom: '48px' }}>
+            <p style={{ color: '#D4AF37', fontSize: '13px', fontWeight: '600', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px' }}>
+              ◆ Core Platform Modules
+            </p>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: '800', color: '#f8fafc', marginBottom: '16px' }}>
+              Operational Infrastructure
             </h2>
-            <p className="text-xl text-slate-600">
-              Streamlined legal operations infrastructure. No bloat, no complexity—just enterprise-grade tools that work.
+            <p style={{ fontSize: '18px', color: '#94a3b8', maxWidth: '600px' }}>
+              Enterprise-grade components engineered for regulatory compliance and operational efficiency.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Product Tiles Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
             {services.map((service, i) => (
-              <div key={i} className="group p-8 bg-white border border-slate-200 rounded-2xl hover:border-[#002147] hover:shadow-xl transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="w-14 h-14 bg-[#002147] rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
+              <div key={i} style={{
+                backgroundColor: '#1e293b',
+                padding: '28px',
+                borderLeft: '4px solid #D4AF37',
+                borderRadius: '4px',
+                boxShadow: '0 4px 6px -1px rgba(0,0,0,0.3)',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
+                  <div style={{
+                    width: '56px',
+                    height: '56px',
+                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    flexShrink: 0,
+                    border: '1px solid rgba(212, 175, 55, 0.3)'
+                  }}>
                     {service.icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#002147] mb-2 group-hover:text-[#D4AF37] transition-colors">
+                    <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#f8fafc', marginBottom: '8px' }}>
                       {service.title}
                     </h3>
-                    <p className="text-slate-600 leading-relaxed">{service.description}</p>
+                    <p style={{ fontSize: '15px', color: '#94a3b8', lineHeight: '1.6' }}>
+                      {service.description}
+                    </p>
+                    <div style={{ marginTop: '16px' }}>
+                      <Link href="/services" style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        color: '#D4AF37',
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        textDecoration: 'none'
+                      }}>
+                        ◆ Learn More
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          
-          <div className="mt-12 text-center">
-            <Link href="/services" className="inline-flex items-center gap-2 text-[#002147] font-semibold hover:text-[#D4AF37] transition-colors">
-              Explore all services
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-[#002147]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Ready to Elevate Your Legal Operations?
+      {/* CTA SECTION */}
+      <section style={{ backgroundColor: '#1e293b', padding: '100px 0', borderTop: '1px solid #334155' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 32px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: '800', color: '#f8fafc', marginBottom: '16px' }}>
+            Ready to Elevate Your Practice?
           </h2>
-          <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
+          <p style={{ fontSize: '18px', color: '#94a3b8', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px' }}>
             Join thousands of law firms who rely on Protocol Counsel for compliant, efficient service coordination.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/demo" className="bg-[#D4AF37] text-[#002147] px-8 py-4 rounded-full font-bold hover:bg-[#c9a430] transition-all shadow-xl">
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <Link href="/demo" style={{
+              backgroundColor: '#D4AF37',
+              color: '#0f172a',
+              padding: '16px 40px',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: '700',
+              textDecoration: 'none',
+              boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
+            }}>
               Schedule Demo
             </Link>
-            <Link href="/contact" className="border border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#002147] transition-all">
+            <Link href="/contact" style={{
+              border: '2px solid #475569',
+              color: '#e2e8f0',
+              padding: '16px 40px',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}>
               Contact Sales
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+      {/* FOOTER */}
+      <footer style={{ backgroundColor: '#020617', padding: '64px 0 32px', borderTop: '1px solid #1e293b' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '48px', marginBottom: '48px' }}>
+            {/* Brand */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-[#002147] rounded-lg flex items-center justify-center">
-                  <span className="text-[#D4AF37] font-bold">PC</span>
-                </div>
-                <span className="text-white font-semibold">PROTOCOL COUNSEL</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+                  <path d="M22 2L40 10V28C40 36 32 42 22 44C12 42 4 36 4 28V10L22 2Z" fill="#1e293b" stroke="#D4AF37" strokeWidth="2"/>
+                  <text x="22" y="27" textAnchor="middle" fill="#D4AF37" fontSize="14" fontWeight="800" fontFamily="Arial">PC</text>
+                </svg>
+                <span style={{ color: '#f8fafc', fontWeight: '700', fontSize: '16px' }}>PROTOCOL COUNSEL</span>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p style={{ color: '#64748b', fontSize: '14px', lineHeight: '1.7' }}>
                 Enterprise legal infrastructure for modern law firms and legal departments.
               </p>
             </div>
+
+            {/* Platform */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Platform              </h4>
-              <ul className="space-y-2">
-                <li><Link href="/services" className="text-slate-400 text-sm hover:text-white">Services</Link></li>
-                <li><Link href="/pricing" className="text-slate-400 text-sm hover:text-white">Pricing</Link></li>
-                <li><Link href="/security" className="text-slate-400 text-sm hover:text-white">Security</Link></li>
-                <li><Link href="/compliance" className="text-slate-400 text-sm hover:text-white">Compliance</Link></li>
+              <h4 style={{ color: '#f8fafc', fontWeight: '600', marginBottom: '16px', fontSize: '14px' }}>Platform</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {['Services', 'Pricing', 'Security', 'Compliance'].map((item, i) => (
+                  <li key={i} style={{ marginBottom: '8px' }}>
+                    <Link href={`/${item.toLowerCase()}`} style={{ color: '#64748b', fontSize: '14px', textDecoration: 'none' }}>{item}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Company */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><Link href="/company" className="text-slate-400 text-sm hover:text-white">About</Link></li>
-                <li><Link href="/case-studies" className="text-slate-400 text-sm hover:text-white">Case Studies</Link></li>
-                <li><Link href="/partners" className="text-slate-400 text-sm hover:text-white">Partners</Link></li>
-                <li><Link href="/careers" className="text-slate-400 text-sm hover:text-white">Careers</Link></li>
+              <h4 style={{ color: '#f8fafc', fontWeight: '600', marginBottom: '16px', fontSize: '14px' }}>Company</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {['About', 'Case Studies', 'Partners', 'Careers'].map((item, i) => (
+                  <li key={i} style={{ marginBottom: '8px' }}>
+                    <Link href={`/${item.toLowerCase().replace(' ', '-')}`} style={{ color: '#64748b', fontSize: '14px', textDecoration: 'none' }}>{item}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Legal */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2">
-                <li><Link href="/privacy" className="text-slate-400 text-sm hover:text-white">Privacy</Link></li>
-                <li><Link href="/terms" className="text-slate-400 text-sm hover:text-white">Terms</Link></li>
-                <li><Link href="/security" className="text-slate-400 text-sm hover:text-white">Security</Link></li>
-                <li><Link href="/cookies" className="text-slate-400 text-sm hover:text-white">Cookies</Link></li>
+              <h4 style={{ color: '#f8fafc', fontWeight: '600', marginBottom: '16px', fontSize: '14px' }}>Legal</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {['Privacy Policy', 'Terms of Service', 'Security', 'Cookies'].map((item, i) => (
+                  <li key={i} style={{ marginBottom: '8px' }}>
+                    <Link href={`/${item.toLowerCase().replace(/ /g, '-')}`} style={{ color: '#64748b', fontSize: '14px', textDecoration: 'none' }}>{item}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-500 text-sm">© 2024 Protocol Counsel. All rights reserved.</p>
-            <p className="text-slate-600 text-xs mt-2 md:mt-0">Technology infrastructure. Licensed providers deliver legal services.</p>
+
+          <div style={{ borderTop: '1px solid #1e293b', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+            <p style={{ color: '#475569', fontSize: '13px' }}>© 2024 Protocol Counsel. All rights reserved.</p>
+            <p style={{ color: '#334155', fontSize: '12px' }}>Technology infrastructure. Licensed providers deliver legal services.</p>
           </div>
         </div>
       </footer>
