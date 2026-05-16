@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  --color-oxford: #002147;
-  --color-gold: #D4AF37;
+  --color-brand-base: #050A18;
+  --color-brand-surface: #0F172A;
+  --color-brand-accent-gold: #C5A059;
+  --color-brand-active-gold: #D4AF37;
+  --color-brand-text-header: #F8FAFC;
+  --color-brand-text-body: #CBD5E1;
+
+  --font-serif: "Playfair Display", "Cinzel", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-:root {
-  --oxford: #002147;
-  --gold: #D4AF37;
+@layer base {
+  /* Enforce structural, sharp layout rules */
+  *, *::before, *::after {
+    border-radius: 0px !important; /* Forces absolute 90-degree angles globally */
+  }
+
+  body {
+    background-color: #050A18;
+    color: #CBD5E1;
+    font-family: var(--font-inter), sans-serif;
+  }
+
+  h1, h2, h3, .font-serif-legal {
+    font-family: var(--font-playfair), serif;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+  }
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
+@layer utilities {
+  .border-institutional {
+    border: 1px solid rgba(197, 160, 89, 0.25);
+  }
+  
+  .border-institutional-bright {
+    border: 1px solid rgba(212, 175, 55, 0.6);
+  }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia, 'Times New Roman', serif;
-  color: var(--oxford);
-  line-height: 1.2;
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #C5A059 0%, #F1D592 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 /* Custom scrollbar */
@@ -29,185 +54,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #050A18;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #002147;
-  border-radius: 4px;
-}
-
-/* Utility classes */
-.card-elevated {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.card-elevated:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: #002147;
-}
-
-/* Authority Badges */
-.authority-badges {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  margin: 1rem 0 0.5rem;
-  flex-wrap: wrap;
-}
-
-.badge {
-  background: #f0f0f0;
-  padding: 0.35rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-/* Portal Styles */
-.portal-layout {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #002147 0%, #001a36 100%);
-}
-
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8fafc;
-}
-
-/* Service Card */
-.service-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.service-card:hover {
-  border-color: #002147;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Dashboard Styles */
-.dashboard-header {
-  background: linear-gradient(135deg, #002147 0%, #001a36 100%);
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-}
-
-/* Table Styles */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.data-table th {
-  background: #f9fafb;
-  font-weight: 600;
-  color: #374151;
-}
-
-.data-table tr:hover {
-  background: #f9fafb;
-}
-
-/* Status Badges */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.status-success {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.status-warning {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.status-error {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-/* Trust Seals */
-.trust-seals {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
-  background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
-}
-
-.seal {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: #666;
-}
-
-/* Footer */
-footer {
-  background: #0f172a;
-  color: #94a3b8;
-}
-
-/* Button Styles */
-.btn-gold {
-  background-color: #D4AF37;
-  color: #002147;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.btn-gold:hover {
-  background-color: #c9a430;
-}
-
-/* Link Styles */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #002147;
-}
-
-/* Focus States */
-*:focus-visible {
-  outline: 2px solid #002147;
-  outline-offset: 2px;
+  background: #C5A059;
 }
 
 /* Selection */
 ::selection {
-  background: #D4AF37;
-  color: #002147;
+  background: rgba(197, 160, 89, 0.3);
+  color: #F8FAFC;
 }
