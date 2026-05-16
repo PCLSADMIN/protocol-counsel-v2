@@ -1,37 +1,6 @@
 import Link from "next/link";
 
 export default function Home() {
-  const systems = [
-    {
-      title: "Medical Records Infrastructure",
-      description: "HIPAA-compliant authorization routing with automated provider tracking.",
-      metric: "99.9%",
-      metricLabel: "Audit Success",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop", // Dark tech/abstract
-    },
-    {
-      title: "Vital Records Fulfillment",
-      description: "Fast-track ordering for official state certificates required for active litigation.",
-      metric: "48hr",
-      metricLabel: "Average Turnaround",
-      image: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=800&auto=format&fit=crop", // Dark purple abstract
-    },
-    {
-      title: "Asset Discovery & Recovery",
-      description: "Intelligent retrieval with chain-of-custody documentation.",
-      metric: "$500M+",
-      metricLabel: "Assets Located",
-      image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=800&auto=format&fit=crop", // Dark architectural
-    },
-    {
-      title: "Secure Document Vault",
-      description: "AES-256 encrypted storage with immutable compliance logging.",
-      metric: "Zero",
-      metricLabel: "Breaches",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop", // Dark server/data
-    },
-  ];
-
   return (
     <main style={{ backgroundColor: '#050A18', color: '#CBD5E1', minHeight: '100vh' }}>
       
@@ -163,7 +132,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* THE SYSTEMS (Cinematic Grid) */}
+      {/* THE SYSTEMS (Data Grid) */}
       <section style={{ padding: '160px 48px' }}>
         <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
           <div style={{ marginBottom: '80px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -181,43 +150,26 @@ export default function Home() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))', gap: '32px' }}>
-            {systems.map((sys, i) => (
-              <div key={i} className="border-institutional" style={{
-                position: 'relative',
-                height: '500px',
-                backgroundColor: '#0F172A',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                padding: '48px'
-              }}>
-                {/* Background Image */}
-                <div style={{
-                  position: 'absolute', inset: 0,
-                  backgroundImage: `url(${sys.image})`,
-                  backgroundSize: 'cover', backgroundPosition: 'center',
-                  opacity: '0.4', transition: 'opacity 0.5s ease',
-                  filter: 'grayscale(100%) contrast(120%)'
-                }} />
-                {/* Gradient Overlay */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(5,10,24,0.95) 0%, rgba(5,10,24,0.2) 60%, transparent 100%)' }} />
-                
-                {/* Content */}
-                <div style={{ position: 'relative', zIndex: 10 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px' }}>
-                    <h3 className="font-serif-legal" style={{ fontSize: '32px', fontWeight: '400', color: '#F8FAFC', maxWidth: '300px', lineHeight: '1.1' }}>
-                      {sys.title}
-                    </h3>
-                    <div style={{ textAlign: 'right' }}>
-                      <p style={{ fontSize: '32px', fontWeight: '300', color: '#C5A059', lineHeight: '1' }}>{sys.metric}</p>
-                      <p style={{ fontSize: '10px', fontWeight: '600', letterSpacing: '0.1em', color: '#CBD5E1', textTransform: 'uppercase', marginTop: '8px' }}>{sys.metricLabel}</p>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-b border-[#C5A059]/20" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))', gap: '0' }}>
+            {[
+              { id: "SYS-01", title: "Medical Records Infrastructure", successMetric: "99.9% Audit Success", desc: "HIPAA-compliant authorization routing with automated provider tracking." },
+              { id: "SYS-02", title: "Vital Records Fulfillment", successMetric: "48hr Avg Turnaround", desc: "Fast-track ordering for official state certificates required for active litigation." },
+              { id: "SYS-03", title: "Asset Discovery & Recovery", successMetric: "$500M+ Located", desc: "Intelligent retrieval with immutable chain-of-custody documentation." },
+              { id: "SYS-04", title: "Secure Document Vault", successMetric: "Zero Breaches", desc: "AES-256 encrypted storage with continuous compliance logging." }
+            ].map((sys) => (
+              <div key={sys.id} className="bg-[#0F172A] p-12 border border-[#C5A059]/10 hover:border-[#C5A059]/40 transition-all flex flex-col justify-between group" style={{ minHeight: '320px' }}>
+                <div>
+                  <div className="flex justify-between items-baseline mb-6" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
+                    <span className="font-mono text-xs text-[#C5A059]/60" style={{ color: 'rgba(197, 160, 89, 0.6)' }}>{sys.id}</span>
+                    <span className="font-mono text-xs italic text-[#D4AF37]" style={{ color: '#D4AF37' }}>{sys.successMetric}</span>
                   </div>
-                  <p style={{ fontSize: '15px', color: '#CBD5E1', maxWidth: '400px', lineHeight: '1.6' }}>
-                    {sys.description}
-                  </p>
+                  <h3 className="text-3xl font-serif text-[#F8FAFC] mb-4 group-hover:text-[#D4AF37] transition-colors font-serif-legal">{sys.title}</h3>
+                  <p className="text-[#CBD5E1] leading-relaxed text-lg" style={{ color: '#CBD5E1', lineHeight: '1.6' }}>{sys.desc}</p>
+                </div>
+                <div className="mt-8 pt-6 border-t border-[#C5A059]/10" style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid rgba(197, 160, 89, 0.1)' }}>
+                  <button className="text-xs font-mono tracking-widest text-[#C5A059] uppercase hover:text-white flex items-center gap-2" style={{ color: '#C5A059', letterSpacing: '0.1em' }}>
+                    Request System Access <span className="text-sm">→</span>
+                  </button>
                 </div>
               </div>
             ))}
