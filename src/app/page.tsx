@@ -85,42 +85,35 @@ export default function Home() {
             </p>
           </div>
           <div className="hidden lg:block">
-            {/* Legal Vault / SecureBridge Background */}
-            <div className="relative aspect-square bg-gradient-to-br from-[#001529] via-[#002147] to-[#001529] rounded-lg overflow-hidden border border-slate-700">
-              {/* Architectural lines */}
-              <div className="absolute inset-0 opacity-20">
-                <svg className="w-full h-full" viewBox="0 0 400 400">
-                  <defs>
-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D4AF37" strokeWidth="0.5"/>
-                    </pattern>
-                  </defs>
-                  <rect width="400" height="400" fill="url(#grid)" opacity="0.3"/>
-                  {/* Vault door circles */}
-                  <circle cx="200" cy="200" r="120" fill="none" stroke="#D4AF37" strokeWidth="1" opacity="0.4"/>
-                  <circle cx="200" cy="200" r="90" fill="none" stroke="#D4AF37" strokeWidth="1" opacity="0.3"/>
-                  <circle cx="200" cy="200" r="60" fill="none" stroke="#D4AF37" strokeWidth="1" opacity="0.2"/>
-                  {/* Center seal */}
-                  <circle cx="200" cy="200" r="30" fill="#D4AF37" opacity="0.1"/>
-                  <text x="200" y="195" textAnchor="middle" fill="#D4AF37" fontSize="10" fontWeight="bold">PC</text>
-                  <text x="200" y="210" textAnchor="middle" fill="#D4AF37" fontSize="6">LEGAL</text>
-                  {/* Corner accents */}
-                  <path d="M 50 50 L 80 50 L 80 80" fill="none" stroke="#D4AF37" strokeWidth="2"/>
-                  <path d="M 350 50 L 320 50 L 320 80" fill="none" stroke="#D4AF37" strokeWidth="2"/>
-                  <path d="M 50 350 L 80 350 L 80 320" fill="none" stroke="#D4AF37" strokeWidth="2"/>
-                  <path d="M 350 350 L 320 350 L 320 320" fill="none" stroke="#D4AF37" strokeWidth="2"/>
-                </svg>
-              </div>
-              {/* Floating text elements */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-[#D4AF37] text-xs tracking-[0.3em] uppercase mb-2">Secure Platform</div>
-                  <div className="text-slate-400 text-sm">End-to-End Encryption</div>
-                </div>
-              </div>
-              {/* Bottom label */}
-              <div className="absolute bottom-6 left-6 text-slate-400 text-sm">
-                <p>SecureBridge™ Architecture</p>
+            {/* Scales of Justice SVG - Gold on Midnight */}
+            <div className="relative aspect-square bg-gradient-to-br from-slate-900 via-[#002147] to-slate-900 rounded-lg overflow-hidden border border-[#D4AF37]/30">
+              <svg className="w-full h-full p-8" viewBox="0 0 200 200" fill="none">
+                {/* Center pole */}
+                <rect x="98" y="20" width="4" height="160" fill="#D4AF37" opacity="0.8"/>
+                {/* Base */}
+                <rect x="85" y="175" width="30" height="8" rx="2" fill="#D4AF37"/>
+                {/* Top beam */}
+                <rect x="20" y="35" width="160" height="4" rx="1" fill="#D4AF37" opacity="0.9"/>
+                {/* Left pan chain */}
+                <line x1="40" y1="39" x2="40" y2="70" stroke="#D4AF37" strokeWidth="1.5"/>
+                {/* Right pan chain */}
+                <line x1="160" y1="39" x2="160" y2="70" stroke="#D4AF37" strokeWidth="1.5"/>
+                {/* Left pan */}
+                <path d="M25 70 Q25 95 40 95 Q55 95 55 70 Z" fill="none" stroke="#D4AF37" strokeWidth="2"/>
+                {/* Right pan */}
+                <path d="M145 70 Q145 95 160 95 Q175 95 175 70 Z" fill="none" stroke="#D4AF37" strokeWidth="2"/>
+                {/* Balance indicator */}
+                <circle cx="100" cy="32" r="8" fill="none" stroke="#D4AF37" strokeWidth="1.5"/>
+                <circle cx="100" cy="32" r="3" fill="#D4AF37" opacity="0.5"/>
+                {/* Decorative scales - left */}
+                <line x1="30" y1="110" x2="30" y2="160" stroke="#D4AF37" strokeWidth="1" opacity="0.4"/>
+                <line x1="50" y1="110" x2="50" y2="160" stroke="#D4AF37" strokeWidth="1" opacity="0.4"/>
+                {/* Decorative scales - right */}
+                <line x1="150" y1="110" x2="150" y2="160" stroke="#D4AF37" strokeWidth="1" opacity="0.4"/>
+                <line x1="170" y1="110" x2="170" y2="160" stroke="#D4AF37" strokeWidth="1" opacity="0.4"/>
+              </svg>
+              <div className="absolute bottom-4 left-0 right-0 text-center">
+                <p className="text-[#D4AF37] text-xs tracking-widest uppercase">Scales of Justice</p>
               </div>
             </div>
           </div>
@@ -163,72 +156,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sealed Vault Dashboard Mockup */}
-      <section id="dashboard" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="bg-oxford px-6 py-4 flex justify-between items-center">
-                  <span className="text-white font-semibold">Sealed Vault™ Dashboard</span>
-                  <span className="text-slate-400 text-sm">Live Preview</span>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    <div className="bg-slate-50 p-4 rounded">
-                      <p className="text-slate-500 text-xs">Active Orders</p>
-                      <p className="text-2xl font-bold text-oxford">247</p>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded">
-                      <p className="text-slate-500 text-xs">Completed Today</p>
-                      <p className="text-2xl font-bold text-oxford">89</p>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded">
-                      <p className="text-slate-500 text-xs">Avg. Time</p>
-                      <p className="text-2xl font-bold text-oxford">42m</p>
-                    </div>
-                  </div>
-                  <div className="border-t border-slate-200 pt-6">
-                    <h4 className="text-sm font-semibold text-oxford mb-4">Timeline of Service</h4>
-                    <div className="space-y-3">
-                      {timeline.map((item, i) => (
-                        <div key={i} className="flex items-center gap-4">
-                          <div className={`w-3 h-3 rounded-full ${
-                            item.status === "complete" ? "bg-green-500" :
-                            item.status === "active" ? "bg-[#D4AF37] animate-pulse" :
-                            "bg-slate-300"
-                          }`} />
-                          <span className="text-xs text-slate-500 w-20">{item.time}</span>
-                          <span className={`text-sm ${
-                            item.status === "active" ? "text-oxford font-medium" : "text-slate-600"
-                          }`}>{item.event}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="bg-oxford text-white p-6 rounded-lg border-l-4 border-l-[#D4AF37]">
-                <h3 className="text-lg font-serif font-bold mb-4">Enterprise Advantages</h3>
-                <ul className="space-y-3 text-slate-300 text-sm">
-                  <li className="flex gap-2"><span className="text-[#D4AF37]">◆</span> Zero-trust architecture</li>
-                  <li className="flex gap-2"><span className="text-[#D4AF37]">◆</span> Real-time chain of custody</li>
-                  <li className="flex gap-2"><span className="text-[#D4AF37]">◆</span> Regulatory compliance verification</li>
-                  <li className="flex gap-2"><span className="text-[#D4AF37]">◆</span> AES-256 encryption</li>
-                </ul>
-              </div>
-              <div className="card-elevated p-6">
-                <h3 className="font-semibold text-oxford mb-2">Enterprise Ready</h3>
-                <p className="text-slate-600 text-sm">Built on SOC 2 Type II Infrastructure*. HIPAA-Ready Data Architecture. Built for firms handling sensitive legal operations at scale.</p>
-                <p className="text-xs text-slate-400 mt-2 italic">* Platform-level certification is currently in-audit.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Secure Legal Data Vault SVG */}
       <section className="py-20 bg-oxford">
@@ -313,19 +240,21 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex justify-center gap-8 text-center">
-            <div>
-              <p className="text-2xl font-bold text-[#002147]">100%</p>
-              <p className="text-xs text-slate-500">Build on SOC 2 Type II*</p>
-              <p className="text-[10px] text-slate-400 italic mt-1">* Infrastructure</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-[#002147]">24/7</p>
-              <p className="text-xs text-slate-500">Security Monitoring</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-[#002147]">0</p>
-              <p className="text-xs text-slate-500">Data Breaches</p>
+          {/* Telemetry Bar - Unified with Gold Borders */}
+          <div className="mt-8 border-y-2 border-[#D4AF37]">
+            <div className="flex justify-center gap-0 text-center">
+              <div className="flex-1 py-4 border-r border-[#D4AF37]/30">
+                <p className="text-2xl font-bold text-oxford">100%</p>
+                <p className="text-xs text-slate-500">Build on SOC 2 Type II*</p>
+              </div>
+              <div className="flex-1 py-4 border-r border-[#D4AF37]/30">
+                <p className="text-2xl font-bold text-oxford">24/7</p>
+                <p className="text-xs text-slate-500">Security Monitoring</p>
+              </div>
+              <div className="flex-1 py-4">
+                <p className="text-2xl font-bold text-oxford">0</p>
+                <p className="text-xs text-slate-500">Data Breaches</p>
+              </div>
             </div>
           </div>
         </div>
